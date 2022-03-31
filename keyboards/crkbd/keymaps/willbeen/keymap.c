@@ -19,22 +19,35 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include QMK_KEYBOARD_H
 #include <stdio.h>
 
-// layers
-enum layers {
-    BASE,
-    LANG,
-    SYMB,
-    NUMB,
-    FNCT
-};
 // space when tapped, mod left control when hold
 #define CMD_ENT  LCTL_T(KC_ENT)
 // tab when tapped, mod left shift when hold
 #define CTL_TAB  LCTL_T(KC_TAB)
 // space when tapped, mod left shift when hold
-// #define CTL_TAB  LT(1,KC_SPC)
+#define LNG_SPC  LT(1,KC_SPC)
 // CMD key rename
 #define KC_CMD  KC_LGUI
+
+// // special chars
+// enum unicode_names {
+//     // accute accents
+//     ACE,
+//     // grave accents
+//     GRA,
+//     SNEK
+// };
+
+// const uint32_t PROGMEM unicode_map[] = {
+//     [AA]  = 0x203D  // ‽
+// };
+
+
+// layers
+#define BASE 0
+#define LANG 1
+#define SYMB 2
+#define NUMB 3
+#define FNCT 4
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [BASE] = LAYOUT_split_3x6_3(
@@ -45,19 +58,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
      MO(FNCT),   KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,                         KC_K,    KC_H,  KC_COMM,  KC_DOT, KC_SLSH, KC_BSLS,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LSFT, CMD_ENT,MO(SYMB),    KC_SPC , KC_LALT, CTL_TAB
+                                          KC_LSFT, CMD_ENT,MO(SYMB),    LNG_SPC, KC_LALT, CTL_TAB
                                       //`--------------------------'  `--------------------------'
   ),
   
   [LANG] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      KC_ESC,   KC_Q,    KC_W,    KC_F,    KC_P,    KC_B,                         KC_J,    KC_L,    KC_U,    KC_Y,    KC_P,  KC_BSPC,
+      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                         KC_J,    KC_L,    KC_U,    KC_Y,    KC_P,   XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-       MO(2),   KC_A,    KC_R,    KC_S,    KC_T,    KC_G,                         KC_M,    KC_N,    KC_E,    KC_I,    KC_O,  KC_QUOT,
+      XXXXXXX,   KC_A,    KC_R,    KC_S,    KC_T,    KC_G,                         KC_M,    KC_N,    KC_E,    KC_I,    KC_O,   XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-       MO(3),   KC_Z,    KC_X,    KC_C,    KC_D,    KC_V,                         KC_K,    KC_H,  KC_COMM,  KC_DOT, KC_SLSH, KC_BSLS,
+      XXXXXXX, XXXXXXX, XXXXXXX,    KC_C, XXXXXXX, XXXXXXX,                         KC_K,    KC_H,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LSFT, CMD_ENT,MO(SYMB),    KC_SPC , KC_LALT, CTL_TAB
+                                          KC_LSFT, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX
                                       //`--------------------------'  `--------------------------'
   ),
 
