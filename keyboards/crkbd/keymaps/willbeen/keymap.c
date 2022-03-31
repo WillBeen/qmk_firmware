@@ -19,6 +19,93 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include QMK_KEYBOARD_H
 #include <stdio.h>
 
+// special chars
+// U / L : upper / lower
+enum unicode_names {
+    // accute accents
+    UACE,
+    LACE,
+    // grave accents
+    UGRA,
+    LGRA,
+    UGRE,
+    LGRE,
+    UGRU,
+    LGRU,
+    // circumflex accents
+    UCIA,
+    LCIA,
+    UCIE,
+    LCIE,
+    UCII,
+    LCII,
+    UCIO,
+    LCIO,
+    UCIU,
+    LCIU,
+    // diaeresis
+    UDIA,
+    LDIA,
+    UDIE,
+    LDIE,
+    UDII,
+    LDII,
+    UDIN,
+    LDIN,
+    UDIO,
+    LDIO,
+    UDIU,
+    LDIU,
+    // cedilla
+    UCEC,
+    LCEC,
+    //tilde
+    UTIN,
+    LTIN,
+    // euro
+    UEUR,
+    LEUR
+};
+
+const uint32_t PROGMEM unicode_map[] = {
+    [UACE] = 0x00E9,
+    [LACE] = 0x00E9,
+    [UGRA] = 0x00E1,
+    [LGRA] = 0x00E1,
+    [UGRE] = 0x00E8,
+    [LGRE] = 0x00E8,
+    [UGRU] = 0x00F9,
+    [LGRU] = 0x00F9,
+    [UCIA] = 0x00E2,
+    [LCIA] = 0x00E2,
+    [UCIE] = 0x00EA,
+    [LCIE] = 0x00EA,
+    [UCII] = 0x00EFE,
+    [LCII] = 0x00EFE,
+    [UCIO] = 0x00F4,
+    [LCIO] = 0x00F4,
+    [UCIU] = 0x00FB,
+    [LCIU] = 0x00FB,
+    [UDIA] = 0x00E4,
+    [LDIA] = 0x00E4,
+    [UDIE] = 0x00EE,
+    [LDIE] = 0x00EE,
+    [UDII] = 0x00EF,
+    [LDII] = 0x00EF,
+    [UDIN] = 0x00F1,
+    [LDIN] = 0x00F1,
+    [UDIO] = 0x00F6,
+    [LDIO] = 0x00F6,
+    [UDIU] = 0x00FC,
+    [LDIU] = 0x00FC,
+    [UCEC] = 0x00E7,
+    [LCEC] = 0x00E7,
+    [UTIN] = 0x00F1,
+    [LTIN] = 0x00F1,
+    [UEUR] = 0x20AC,
+    [LEUR] = 0x20AC
+};
+
 // space when tapped, mod left control when hold
 #define CMD_ENT  LCTL_T(KC_ENT)
 // tab when tapped, mod left shift when hold
@@ -27,19 +114,25 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define LNG_SPC  LT(1,KC_SPC)
 // CMD key rename
 #define KC_CMD  KC_LGUI
-
-// // special chars
-// enum unicode_names {
-//     // accute accents
-//     ACE,
-//     // grave accents
-//     GRA,
-//     SNEK
-// };
-
-// const uint32_t PROGMEM unicode_map[] = {
-//     [AA]  = 0x203D  // ‽
-// };
+// special chars
+#define _ACE XP(LACE,UACE)
+#define _GRA XP(LGRA,UGRA)
+#define _GRE XP(LGRE,UGRE)
+#define _GRU XP(LGRU,UGRU)
+#define _CIA XP(LCIA,UCIA)
+#define _CIE XP(LCIE,UCIE)
+#define _CII XP(LCII,UCII)
+#define _CIO XP(LCIO,UCIO)
+#define _CIU XP(LCIU,UCIU)
+#define _DIA XP(LDIA,UDIA)
+#define _DIE XP(LDIE,UDIE)
+#define _DII XP(LDII,UDII)
+#define _DIN XP(LDIN,UDIN)
+#define _DIO XP(LDIO,UDIO)
+#define _DIU XP(LDIU,UDIU)
+#define _CEC XP(LCEC,UCEC)
+#define _TIN XP(LTIN,UTIN)
+#define _EUR XP(LEUR,UEUR)
 
 
 // layers
@@ -64,11 +157,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   
   [LANG] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                         KC_J,    KC_L,    KC_U,    KC_Y,    KC_P,   XXXXXXX,
+      XXXXXXX,   _CIA , XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                        _DIU ,   _CIU ,   _GRU ,   _DII ,   _DIO , XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      XXXXXXX,   KC_A,    KC_R,    KC_S,    KC_T,    KC_G,                         KC_M,    KC_N,    KC_E,    KC_I,    KC_O,   XXXXXXX,
+      XXXXXXX,   _GRA ,   _DIA , XXXXXXX,   _EUR , XXXXXXX,                        _TIN ,   _GRE ,   _ACE ,   _CII ,   _CIO , XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      XXXXXXX, XXXXXXX, XXXXXXX,    KC_C, XXXXXXX, XXXXXXX,                         KC_K,    KC_H,   XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,
+      XXXXXXX, XXXXXXX, XXXXXXX,   _CEC , XXXXXXX, XXXXXXX,                      XXXXXXX,   _CIE ,   _DIE , XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           KC_LSFT, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX
                                       //`--------------------------'  `--------------------------'
