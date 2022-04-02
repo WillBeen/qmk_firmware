@@ -1,6 +1,20 @@
-MOUSEKEY_ENABLE   = yes    # Mouse keys
-RGBLIGHT_ENABLE   = yes    # Enable WS2812 RGB underlight.
-OLED_ENABLE       = yes
-OLED_DRIVER       = SSD1306
-LTO_ENABLE        = yes
-# UNICODEMAP_ENABLE = yes
+# Mouse keys
+MOUSEKEY_ENABLE   = yes
+
+# Enable WS2812 RGB underlight.
+# this module is too heavy
+RGBLIGHT_ENABLE = no
+RGB_MATRIX_ENABLE = yes
+
+# keyboard screens management
+OLED_ENABLE            = yes
+OLED_DRIVER            = SSD1306
+
+# reduce the size of the firmware
+LTO_ENABLE             = yes
+
+# special chars management
+UNICODEMAP_ENABLE = yes
+
+
+
