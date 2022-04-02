@@ -113,7 +113,7 @@ const uint32_t PROGMEM unicode_map[] = {
 #define _OPT_I  LOPT_T(KC_I)
 #define _CMD_S  LCMD_T(KC_S)
 #define _CMD_E  LCMD_T(KC_E)
-#define NUMB_TAB  LT(NUMB,KC_TAB)
+#define _NUM_TAB  LT(_NUM,KC_TAB)
 // special chars
 #define _ACE XP(LACE,UACE)
 #define _GRA XP(LGRA,UGRA)
@@ -136,26 +136,26 @@ const uint32_t PROGMEM unicode_map[] = {
 
 
 // layers
-#define BASE 0
-#define SYMB 1
-#define NUMB 2
-#define FNCT 3
-#define LANG 4
+#define _BSE 0
+#define _SYM 1
+#define _NUM 2
+#define _FCT 3
+#define _LNG 4
 
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-  [BASE] = LAYOUT_split_3x6_3(
+  [_BSE] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
       KC_ESC ,   KC_Q ,   KC_W ,   KC_F ,   KC_P ,   KC_B ,                        KC_J ,   KC_L ,   KC_U ,   KC_Y ,   KC_P , KC_BSPC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-     MO(FNCT), _CTL_A , _OPT_R , _CMD_S ,   KC_T ,   KC_G ,                        KC_M ,   KC_N , _CMD_E , _OPT_I , _CTL_O , KC_QUOT,
+     MO(_FCT), _CTL_A , _OPT_R , _CMD_S ,   KC_T ,   KC_G ,                        KC_M ,   KC_N , _CMD_E , _OPT_I , _CTL_O , KC_QUOT,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_DEL ,   KC_Z ,   KC_X ,   KC_C ,   KC_D ,   KC_V ,                        KC_K ,   KC_H , KC_COMM,  KC_DOT, KC_SLSH, KC_BSLS,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                        MO(SYMB), KC_LSFT , KC_ENT ,    KC_SPC ,MO(LANG),NUMB_TAB
+                                        MO(_SYM), KC_LSFT , KC_ENT ,    KC_SPC ,MO(_LNG),_NUM_TAB
                                       //`--------------------------'  `--------------------------'
   ),
   
-  [LANG] = LAYOUT_split_3x6_3(
+  [_LNG] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
       XXXXXXX,   _CIA , XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                        _DIU ,   _CIU ,   _GRU ,   _DII ,   _DIO , XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
@@ -167,7 +167,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                       //`--------------------------'  `--------------------------'
   ),
 
-  [SYMB] = LAYOUT_split_3x6_3(
+  [_SYM] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
       KC_ESC , KC_EXLM,  KC_AT , KC_HASH, KC_DLR , KC_PERC,                      KC_CIRC, KC_LCBR, KC_RCBR,  KC_LT ,  KC_GT , KC_BSPC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
@@ -175,11 +175,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_DEL , KC_TILD, KC_CUT , KC_COPY, KC_PSTE, KC_GRV ,                      KC_ASTR, KC_LEFT, KC_DOWN,  KC_UP , KC_RGHT, KC_EQL ,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          XXXXXXX, XXXXXXX, XXXXXXX,    KC_SPC , KC_TAB ,MO(NUMB)
+                                          XXXXXXX, XXXXXXX, XXXXXXX,    KC_SPC , KC_TAB ,MO(_NUM)
                                       //`--------------------------'  `--------------------------'
   ),
 
-  [NUMB] = LAYOUT_split_3x6_3(
+  [_NUM] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
       KC_ESC , KC_EXLM,  KC_AT , KC_HASH, KC_DLR , KC_PERC,                      KC_CIRC,  KC_7  ,  KC_8  ,  KC_9  , KC_PEQL, KC_BSPC,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
@@ -191,7 +191,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                       //`--------------------------'  `--------------------------'
   ),
 
-  [FNCT] = LAYOUT_split_3x6_3(
+  [_FCT] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, KC_F9  , KC_F10 , KC_F11 , KC_F12 , XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
@@ -204,6 +204,25 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 };
 
+// for "_NUM_TAB" key, I want layer "_NUM" to be activated right when the key is pressed
+// but if no other key is pressed, I want KC_TAB to be sent
+uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case _NUM_TAB:
+            return 5;
+        default:
+            return TAPPING_TERM;
+    }
+}
+bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
+    switch (keycode) {
+        case _NUM_TAB:
+            return true;
+        default:
+            return false;
+    }
+}
+
 #ifdef OLED_ENABLE
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
   if (!is_keyboard_master()) {
@@ -212,7 +231,7 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
   return rotation;
 }
 
-// #define L_BASE 0
+// #define L__BSE 0
 // #define L_LOWER 2
 // #define L_RAISE 4
 // #define L_ADJUST 8
@@ -220,19 +239,19 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 void oled_render_layer_state(void) {
     oled_write_P(PSTR("Layer: "), false);
     switch (layer_state) {
-        case BASE:
+        case _BSE:
             oled_write_ln_P(PSTR("Base"), false);
             break;
-        case SYMB:
+        case _SYM:
             oled_write_ln_P(PSTR("Symbols"), false);
             break;
-        case NUMB:
+        case _NUM:
             oled_write_ln_P(PSTR("Numbers"), false);
             break;
-        case FNCT:
+        case _FCT:
             oled_write_ln_P(PSTR("Fn keys"), false);
             break;
-        case LANG:
+        case _LNG:
             oled_write_ln_P(PSTR("Accents"), false);
             break;
     }

@@ -32,8 +32,9 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // #define EE_HANDS
 
 //#define TAPPING_FORCE_HOLD
-#define TAPPING_TERM 50
-#define RETRO_TAPPING
+#define TAPPING_TERM 200
+#define TAPPING_TERM_PER_KEY
+#define RETRO_TAPPING_PER_KEY
 
 #ifdef RGBLIGHT_ENABLE
     #define RGBLIGHT_EFFECT_BREATHING
