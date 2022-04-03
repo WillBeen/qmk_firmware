@@ -134,6 +134,10 @@ const uint32_t PROGMEM unicode_map[] = {
 #define _TIN XP(LTIN,UTIN)
 #define _EUR XP(LEUR,UEUR)
 
+enum custom_keycodes {
+    _MUTE = SAFE_RANGE,
+    _UMUTE
+};
 
 // layers
 #define _BSE 0
@@ -195,7 +199,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, KC_F9  , KC_F10 , KC_F11 , KC_F12 , XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      XXXXXXX, XXXXXXX, KC_LOPT, KC_LCMD, KC_BTN1, KC_BTN2,                      XXXXXXX, KC_F5  , KC_F6  , KC_F7  , KC_F8  , XXXXXXX,
+      XXXXXXX, XXXXXXX, KC_LOPT, KC_LCMD,  _MUTE , _UMUTE ,                      XXXXXXX, KC_F5  , KC_F6  , KC_F7  , KC_F8  , XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX,                      XXXXXXX, KC_F1  , KC_F2  , KC_F3  , KC_F4  , XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
@@ -320,9 +324,81 @@ bool oled_task_user(void) {
     return false;
 }
 
+static bool _mute_state = false;
+
+void _rgb_muted(void) {
+  if (_mute_state) {
+    rgb_matrix_mode(RGB_MATRIX_BREATHING);
+    rgblight_sethsv(HSV_RED);
+  } else {
+    rgblight_sethsv(HSV_OFF);
+  }
+}
+
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   if (record->event.pressed) {
     set_keylog(keycode, record);
+  }
+  
+  switch (keycode) {
+      case _MUTE:
+          if (record->event.pressed) {
+              register_code(KC_LCMD);
+              register_code(KC_LSFT);
+              register_code(KC_F11);
+              _mute_state = true;
+              _rgb_muted();
+          } else {
+              unregister_code(KC_F11);
+              unregister_code(KC_LSFT);
+              unregister_code(KC_LCMD);
+          }
+          break;
+      case _UMUTE:
+          if (record->event.pressed) {
+              register_code(KC_LCMD);
+              register_code(KC_LSFT);
+              register_code(KC_F12);
+              _mute_state = false;
+              _rgb_muted();
+          } else {
+              unregister_code(KC_F12);
+              unregister_code(KC_LSFT);
+              unregister_code(KC_LCMD);
+          }
+          break;
+      case MO(_SYM):
+          if (record->event.pressed) {
+              rgb_matrix_mode(RGB_MATRIX_BAND_SPIRAL_VAL);
+              rgblight_sethsv(HSV_BLUE);
+          } else {
+              _rgb_muted();
+          }
+          break;
+      case MO(_NUM):
+          if (record->event.pressed) {
+              rgb_matrix_mode(RGB_MATRIX_BAND_SPIRAL_VAL);
+              rgblight_sethsv(HSV_GREEN);
+          } else {
+              _rgb_muted();
+          }
+          break;
+      case MO(_FCT):
+          if (record->event.pressed) {
+              rgb_matrix_mode(RGB_MATRIX_BAND_SPIRAL_VAL);
+              rgblight_sethsv(HSV_YELLOW);
+          } else {
+              _rgb_muted();
+          }
+          break;
+      case MO(_LNG):
+          if (record->event.pressed) {
+              rgb_matrix_mode(RGB_MATRIX_BAND_SPIRAL_VAL);
+              rgblight_sethsv(HSV_PURPLE);
+          } else {
+              _rgb_muted();
+          }
+          break;
   }
   return true;
 }
