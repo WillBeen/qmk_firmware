@@ -155,7 +155,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_DEL ,   KC_Z ,   KC_X ,   KC_C ,   KC_D ,   KC_V ,                        KC_K ,   KC_H , KC_COMM,  KC_DOT, KC_SLSH, KC_BSLS,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                        MO(_SYM), KC_LSFT , KC_ENT ,    KC_SPC ,MO(_LNG),_NUM_TAB
+                                         MO(_SYM), KC_LSFT , KC_ENT ,    KC_SPC ,MO(_LNG), KC_TAB
                                       //`--------------------------'  `--------------------------'
   ),
   
@@ -167,7 +167,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       XXXXXXX, XXXXXXX, XXXXXXX,   _CEC , XXXXXXX, XXXXXXX,                      XXXXXXX,   _TIN ,   _DIE , XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_LSFT, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX
+                                         MO(_NUM), KC_LSFT, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -179,7 +179,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_DEL , KC_TILD, KC_CUT , KC_COPY, KC_PSTE, KC_GRV ,                      KC_ASTR, KC_LEFT, KC_DOWN,  KC_UP , KC_RGHT, KC_EQL ,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          XXXXXXX, XXXXXXX, XXXXXXX,    KC_SPC , KC_TAB ,MO(_NUM)
+                                          XXXXXXX, XXXXXXX, XXXXXXX,    KC_SPC ,MO(_NUM), KC_TAB 
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -191,7 +191,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       KC_DEL , KC_TILD, KC_CUT , KC_COPY, KC_PSTE, KC_GRV ,                      KC_PMNS,  KC_1  ,  KC_2  ,  KC_3  , KC_PDOT, KC_PSLS,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_TAB , KC_SPC , KC_ENT ,    XXXXXXX, XXXXXXX, XXXXXXX
+                                          XXXXXXX, KC_LSFT, KC_ENT ,    KC_SPC , XXXXXXX, KC_TAB
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -210,22 +210,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 // for "_NUM_TAB" key, I want layer "_NUM" to be activated right when the key is pressed
 // but if no other key is pressed, I want KC_TAB to be sent
-uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        case _NUM_TAB:
-            return 5;
-        default:
-            return TAPPING_TERM;
-    }
-}
-bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
-    switch (keycode) {
-        case _NUM_TAB:
-            return true;
-        default:
-            return false;
-    }
-}
+// uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
+//     switch (keycode) {
+//         case _NUM_TAB:
+//             return 5;
+//         default:
+//             return TAPPING_TERM;
+//     }
+// }
+// bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
+//     switch (keycode) {
+//         case _NUM_TAB:
+//             return true;
+//         default:
+//             return false;
+//     }
+// }
 
 #ifdef OLED_ENABLE
 oled_rotation_t oled_init_user(oled_rotation_t rotation) {
