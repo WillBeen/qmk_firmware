@@ -299,16 +299,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // //     }
 // // }
 
+uint8_t my_mods;
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
-    // my_mods = get_mods()
+    my_mods = get_mods();
   
     switch (keycode) {
         case KC_PDOT:
-            if (get_mods() & MOD_BIT(KC_LSFT)) {
+            if (my_mods & MOD_BIT(KC_LSFT)) {
                 if (record->event.pressed) {
-                    unregister_code(KC_LSFT);
+                    unregister_mods(MOD_MASK_SHIFT);
                     tap_code(KC_COMM);
-                    register_code(KC_LSFT);
+                    set_mods(my_mods);
                     return false;
                 } else {
                     return false;
@@ -335,9 +336,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           break;
         case TILDE:
             if (record->event.pressed) {
-                register_code(KC_LSFT);
+                add_oneshot_mods(MOD_MASK_SHIFT);
                 tap_code(KC_GRV);
-                unregister_code(KC_LSFT);
                 tap_code(KC_SPC);
                 return false;
             } else {
@@ -346,9 +346,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           break;
         case DQUOT:
             if (record->event.pressed) {
-                register_code(KC_LSFT);
+                add_oneshot_mods(MOD_MASK_SHIFT);
                 tap_code(KC_QUOT);
-                unregister_code(KC_LSFT);
                 tap_code(KC_SPC);
                 return false;
             } else {
@@ -357,9 +356,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           break;
         case CIRC:
             if (record->event.pressed) {
-                register_code(KC_LSFT);
+                add_oneshot_mods(MOD_MASK_SHIFT);
                 tap_code(KC_6);
-                unregister_code(KC_LSFT);
                 tap_code(KC_SPC);
                 return false;
             } else {
@@ -374,6 +372,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     
         case _ACE:
             if (record->event.pressed) {
+                add_oneshot_mods(MOD_MASK_SHIFT);
                 tap_code(KC_QUOT);
                 tap_code(KC_E);
                 return false;
@@ -383,7 +382,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           break;
         case _GRA:
             if (record->event.pressed) {
+                unregister_mods(MOD_MASK_SHIFT);
                 tap_code(KC_GRV);
+                set_mods(my_mods);
                 tap_code(KC_A);
                 return false;
             } else {
@@ -392,7 +393,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           break;
         case _GRE:
             if (record->event.pressed) {
+                unregister_mods(MOD_MASK_SHIFT);
                 tap_code(KC_GRV);
+                set_mods(my_mods);
                 tap_code(KC_E);
                 return false;
             } else {
@@ -401,7 +404,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           break;
         case _GRU:
             if (record->event.pressed) {
+                unregister_mods(MOD_MASK_SHIFT);
                 tap_code(KC_GRV);
+                set_mods(my_mods);
                 tap_code(KC_U);
                 return false;
             } else {
@@ -410,9 +415,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           break;
         case _CIA:
             if (record->event.pressed) {
-                register_code(KC_LSFT);
+                add_oneshot_mods(MOD_MASK_SHIFT);
                 tap_code(KC_6);
-                unregister_code(KC_LSFT);
                 tap_code(KC_A);
                 return false;
             } else {
@@ -421,9 +425,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           break;
         case _CIE:
             if (record->event.pressed) {
-                register_code(KC_LSFT);
+                add_oneshot_mods(MOD_MASK_SHIFT);
                 tap_code(KC_6);
-                unregister_code(KC_LSFT);
                 tap_code(KC_E);
                 return false;
             } else {
@@ -432,9 +435,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           break;
         case _CII:
             if (record->event.pressed) {
-                register_code(KC_LSFT);
+                add_oneshot_mods(MOD_MASK_SHIFT);
                 tap_code(KC_6);
-                unregister_code(KC_LSFT);
                 tap_code(KC_I);
                 return false;
             } else {
@@ -443,9 +445,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           break;
         case _CIO:
             if (record->event.pressed) {
-                register_code(KC_LSFT);
+                add_oneshot_mods(MOD_MASK_SHIFT);
                 tap_code(KC_6);
-                unregister_code(KC_LSFT);
                 tap_code(KC_O);
                 return false;
             } else {
@@ -454,9 +455,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           break;
         case _CIU:
             if (record->event.pressed) {
-                register_code(KC_LSFT);
+                add_oneshot_mods(MOD_MASK_SHIFT);
                 tap_code(KC_6);
-                unregister_code(KC_LSFT);
                 tap_code(KC_U);
                 return false;
             } else {
@@ -465,9 +465,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           break;
         case _DIA:
             if (record->event.pressed) {
-                register_code(KC_LSFT);
+                add_oneshot_mods(MOD_MASK_SHIFT);
                 tap_code(KC_QUOT);
-                unregister_code(KC_LSFT);
                 tap_code(KC_A);
                 return false;
             } else {
@@ -476,9 +475,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           break;
         case _DIE:
             if (record->event.pressed) {
-                register_code(KC_LSFT);
+                add_oneshot_mods(MOD_MASK_SHIFT);
                 tap_code(KC_QUOT);
-                unregister_code(KC_LSFT);
                 tap_code(KC_E);
                 return false;
             } else {
@@ -487,9 +485,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           break;
         case _DII:
             if (record->event.pressed) {
-                register_code(KC_LSFT);
+                add_oneshot_mods(MOD_MASK_SHIFT);
                 tap_code(KC_QUOT);
-                unregister_code(KC_LSFT);
                 tap_code(KC_I);
                 return false;
             } else {
@@ -498,9 +495,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           break;
         case _DIO:
             if (record->event.pressed) {
-                register_code(KC_LSFT);
+                add_oneshot_mods(MOD_MASK_SHIFT);
                 tap_code(KC_QUOT);
-                unregister_code(KC_LSFT);
                 tap_code(KC_O);
                 return false;
             } else {
@@ -509,9 +505,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           break;
         case _DIU:
             if (record->event.pressed) {
-                register_code(KC_LSFT);
+                add_oneshot_mods(MOD_MASK_SHIFT);
                 tap_code(KC_QUOT);
-                unregister_code(KC_LSFT);
                 tap_code(KC_U);
                 return false;
             } else {
@@ -520,9 +515,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           break;
         case _CEC:
             if (record->event.pressed) {
-                register_code(KC_LOPT);
+                add_oneshot_mods(MOD_MASK_ALT);
                 tap_code(KC_C);
-                unregister_code(KC_LOPT);
                 return false;
             } else {
                 return false;
@@ -530,9 +524,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           break;
         case _TIN:
             if (record->event.pressed) {
-                register_code(KC_LSFT);
+                add_oneshot_mods(MOD_MASK_SHIFT);
                 tap_code(KC_GRV);
-                unregister_code(KC_LSFT);
                 tap_code(KC_N);
                 return false;
             } else {
@@ -541,11 +534,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           break;
         case _EUR:
             if (record->event.pressed) {
-                register_code(KC_LSFT);
-                register_code(KC_LOPT);
+                add_oneshot_mods(MOD_MASK_SHIFT);
+                add_oneshot_mods(MOD_MASK_ALT);
                 tap_code(KC_2);
-                unregister_code(KC_LOPT);
-                unregister_code(KC_LSFT);
                 return false;
             } else {
                 return false;
