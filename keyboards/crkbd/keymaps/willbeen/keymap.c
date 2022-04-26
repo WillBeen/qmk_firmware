@@ -122,25 +122,53 @@ const uint32_t PROGMEM unicode_map[] = {
 #define _CTLnTAB  LCTL(KC_TAB)
 #define _CMDnTAB  LCMD(KC_TAB)
 #define _CMDnT  LCMD(KC_T)
+#define _CMDnX  LCMD(KC_X)
+#define _CMDnC  LCMD(KC_C)
+#define _CMDnV  LCMD(KC_V)
+//dead keys
+#define _DQUOT
+#define _CIRC
+#define _TILDE
+
 // special chars
-#define _ACE XP(LACE,UACE)
-#define _GRA XP(LGRA,UGRA)
-#define _GRE XP(LGRE,UGRE)
-#define _GRU XP(LGRU,UGRU)
-#define _CIA XP(LCIA,UCIA)
-#define _CIE XP(LCIE,UCIE)
-#define _CII XP(LCII,UCII)
-#define _CIO XP(LCIO,UCIO)
-#define _CIU XP(LCIU,UCIU)
-#define _DIA XP(LDIA,UDIA)
-#define _DIE XP(LDIE,UDIE)
-#define _DII XP(LDII,UDII)
-#define _DIN XP(LDIN,UDIN)
-#define _DIO XP(LDIO,UDIO)
-#define _DIU XP(LDIU,UDIU)
-#define _CEC XP(LCEC,UCEC)
-#define _TIN XP(LTIN,UTIN)
-#define _EUR XP(LEUR,UEUR)
+// #define _ACE XP(LACE,UACE)
+// #define _GRA XP(LGRA,UGRA)
+// #define _GRE XP(LGRE,UGRE)
+// #define _GRU XP(LGRU,UGRU)
+// #define _CIA XP(LCIA,UCIA)
+// #define _CIE XP(LCIE,UCIE)
+// #define _CII XP(LCII,UCII)
+// #define _CIO XP(LCIO,UCIO)
+// #define _CIU XP(LCIU,UCIU)
+// #define _DIA XP(LDIA,UDIA)
+// #define _DIE XP(LDIE,UDIE)
+// #define _DII XP(LDII,UDII)
+// #define _DIN XP(LDIN,UDIN)
+// #define _DIO XP(LDIO,UDIO)
+// #define _DIU XP(LDIU,UDIU)
+// #define _CEC XP(LCEC,UCEC)
+// #define _TIN XP(LTIN,UTIN)
+// #define _EUR XP(LEUR,UEUR)
+
+
+#define _ACE UC(0x00E9)
+#define _GRA UC(0x00E9)
+#define _GRE UC(0x00E9)
+#define _GRU UC(0x00E9)
+#define _CIA UC(0x00E9)
+#define _CIE UC(0x00E9)
+#define _CII UC(0x00E9)
+#define _CIO UC(0x00E9)
+#define _CIU UC(0x00E9)
+#define _DIA UC(0x00E9)
+#define _DIE UC(0x00E9)
+#define _DII UC(0x00E9)
+#define _DIN UC(0x00E9)
+#define _DIO UC(0x00E9)
+#define _DIU UC(0x00E9)
+#define _CEC UC(0x00E9)
+#define _TIN UC(0x00E9)
+#define _EUR UC(0x00E9)
 
 enum layers {
   _BSE,
@@ -153,7 +181,7 @@ enum layers {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_BSE] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      XXXXXXX,   KC_Q ,   KC_W ,   KC_F ,   KC_P ,   KC_B ,                        KC_J ,   KC_L ,   KC_U ,   KC_Y ,   KC_P , XXXXXXX,
+      XXXXXXX,   KC_Q ,   KC_W ,   KC_F ,   KC_P ,   KC_B ,                        KC_J ,   KC_L ,   KC_U ,   KC_Y , KC_SCLN, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       XXXXXXX, _CTL_A , _OPT_R , _CMD_S ,   KC_T ,   KC_G ,                        KC_H ,   KC_N , _CMD_E , _OPT_I , _CTL_O , XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
@@ -169,7 +197,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       XXXXXXX,_CTL_GRA,_OPT_GRV,_CMD_MNS, KC_QUOT, KC_ENT ,                        _TIN ,   _GRE ,   _ACE ,   _CII ,   _CIO , XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      XXXXXXX,   _DIA , XXXXXXX,   _CEC , KC_BSLS, KC_TAB ,                        _EUR ,   KC_M ,   _CIE ,   _DIE , XXXXXXX, XXXXXXX,
+      XXXXXXX,   _DIA , XXXXXXX,   _CEC , KC_BSLS, KC_TAB ,                        _EUR ,   KC_M ,   _CIE ,   _DIE , UC_M_MA, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           KC_DEL , KC_LSFT, KC_BSPC,    XXXXXXX, XXXXXXX, XXXXXXX
                                       //`--------------------------'  `--------------------------'
@@ -205,9 +233,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       XXXXXXX, KC_LCTL, KC_LOPT, KC_LCMD, KC_BTN1, KC_ENT ,                       KC_0  ,  KC_4  ,  KC_5  ,  KC_6  , KC_PEQL, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      XXXXXXX, KC_CUT , KC_COPY, KC_PSTE, KC_BTN2, KC_TAB ,                      KC_PMNS,  KC_1  ,  KC_2  ,  KC_3  , KC_PSLS, XXXXXXX,
+      XXXXXXX, _CMDnX , _CMDnC , _CMDnV , KC_BTN2, KC_TAB ,                      KC_PMNS,  KC_1  ,  KC_2  ,  KC_3  , KC_PSLS, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_COMM, KC_LSFT, KC_BSPC,    KC_PDOT, KC_SPC ,TO(_BSE)
+                                          XXXXXXX, KC_LSFT, KC_BSPC,    KC_PDOT, KC_SPC ,TO(_BSE)
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -243,31 +271,79 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // //     }
 // // }
 
-// bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   
-//   switch (keycode) {
-//       case _MUTE:
-//           if (record->event.pressed) {
-//               register_code(KC_LCMD);
-//               register_code(KC_LSFT);
-//               register_code(KC_F11);
-//           } else {
-//               unregister_code(KC_F11);
-//               unregister_code(KC_LSFT);
-//               unregister_code(KC_LCMD);
-//           }
-//           break;
-//       case _UMUTE:
-//           if (record->event.pressed) {
-//               register_code(KC_LCMD);
-//               register_code(KC_LSFT);
-//               register_code(KC_F12);
-//           } else {
-//               unregister_code(KC_F12);
-//               unregister_code(KC_LSFT);
-//               unregister_code(KC_LCMD);
-//           }
-//           break;
-//   }
-//   return true;
-// }
+    switch (keycode) {
+        case KC_PDOT:
+            if (get_mods() & MOD_BIT(KC_LSFT)) {
+                if (record->event.pressed) {
+                    unregister_code(KC_LSFT);
+                    register_code(KC_COMM);
+                    unregister_code(KC_COMM);
+                    register_code(KC_LSFT);
+                    return false;
+                } else {
+                    return false;
+                }
+            }
+          break;
+        case KC_QUOT:
+            if (record->event.pressed) {
+                register_code(KC_QUOT);
+                unregister_code(KC_QUOT);
+                register_code(KC_SPC);
+                unregister_code(KC_SPC);
+                return false;
+            } else {
+                return false;
+            }
+          break;
+        case KC_GRV:
+            if (record->event.pressed) {
+                register_code(KC_GRV);
+                unregister_code(KC_GRV);
+                register_code(KC_SPC);
+                unregister_code(KC_SPC);
+                return false;
+            } else {
+                return false;
+            }
+          break;
+        // case KC_TILD:
+        //     if (record->event.pressed) {
+        //         register_code(KC_TILD);
+        //         unregister_code(KC_TILD);
+        //         register_code(KC_SPC);
+        //         unregister_code(KC_SPC);
+        //         return false;
+        //     } else {
+        //         return false;
+        //     }
+        //   break;
+        // case KC_DQUO:
+        //     if (record->event.pressed) {
+        //         register_code(KC_DQUO);
+        //         unregister_code(KC_DQUO);
+        //         register_code(KC_SPC);
+        //         unregister_code(KC_SPC);
+        //         return false;
+        //     } else {
+        //         return false;
+        //     }
+        //   break;
+        // case _CIRC:
+        //     if (get_mods() & MOD_BIT(KC_LSFT)) {
+        //         if (record->event.pressed) {
+        //             register_code(KC_CIRC);
+        //             unregister_code(KC_CIRC);
+        //             register_code(KC_SPC);
+        //             unregister_code(KC_SPC);
+        //             return false;
+        //         } else {
+        //             return false;
+        //         }
+        //     }
+        //   break;
+  }
+  return true;
+}
