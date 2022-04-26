@@ -19,93 +19,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #include QMK_KEYBOARD_H
 #include <stdio.h>
 
-// special chars
-// U / L : upper / lower
-// enum unicode_names {
-//     // accute accents
-//     UACE,
-//     LACE,
-//     // grave accents
-//     UGRA,
-//     LGRA,
-//     UGRE,
-//     LGRE,
-//     UGRU,
-//     LGRU,
-//     // circumflex accents
-//     UCIA,
-//     LCIA,
-//     UCIE,
-//     LCIE,
-//     UCII,
-//     LCII,
-//     UCIO,
-//     LCIO,
-//     UCIU,
-//     LCIU,
-//     // diaeresis
-//     UDIA,
-//     LDIA,
-//     UDIE,
-//     LDIE,
-//     UDII,
-//     LDII,
-//     UDIN,
-//     LDIN,
-//     UDIO,
-//     LDIO,
-//     UDIU,
-//     LDIU,
-//     // cedilla
-//     UCEC,
-//     LCEC,
-//     //tilde
-//     UTIN,
-//     LTIN,
-//     // euro
-//     UEUR,
-//     LEUR
-// };
-
-// const uint32_t PROGMEM unicode_map[] = {
-//     [UACE] = 0x00E9,
-//     [LACE] = 0x00E9,
-//     [UGRA] = 0x00E1,
-//     [LGRA] = 0x00E1,
-//     [UGRE] = 0x00E8,
-//     [LGRE] = 0x00E8,
-//     [UGRU] = 0x00F9,
-//     [LGRU] = 0x00F9,
-//     [UCIA] = 0x00E2,
-//     [LCIA] = 0x00E2,
-//     [UCIE] = 0x00EA,
-//     [LCIE] = 0x00EA,
-//     [UCII] = 0x0EFE,
-//     [LCII] = 0x0EFE,
-//     [UCIO] = 0x00F4,
-//     [LCIO] = 0x00F4,
-//     [UCIU] = 0x00FB,
-//     [LCIU] = 0x00FB,
-//     [UDIA] = 0x00E4,
-//     [LDIA] = 0x00E4,
-//     [UDIE] = 0x00EE,
-//     [LDIE] = 0x00EE,
-//     [UDII] = 0x00EF,
-//     [LDII] = 0x00EF,
-//     [UDIN] = 0x00F1,
-//     [LDIN] = 0x00F1,
-//     [UDIO] = 0x00F6,
-//     [LDIO] = 0x00F6,
-//     [UDIU] = 0x00FC,
-//     [LDIU] = 0x00FC,
-//     [UCEC] = 0x00E7,
-//     [LCEC] = 0x00E7,
-//     [UTIN] = 0x00F1,
-//     [LTIN] = 0x00F1,
-//     [UEUR] = 0x20AC,
-//     [LEUR] = 0x20AC
-// };
-
 // hold/press keys
 #define _CTL_A  LCTL_T(KC_A)
 #define _CTL_GRA  LCTL_T(_GRA)
@@ -158,46 +71,6 @@ enum my_keycodes {
     _EUR
 };
 
-// special chars
-// #define _ACE XP(LACE,UACE)
-// #define _GRA XP(LGRA,UGRA)
-// #define _GRE XP(LGRE,UGRE)
-// #define _GRU XP(LGRU,UGRU)
-// #define _CIA XP(LCIA,UCIA)
-// #define _CIE XP(LCIE,UCIE)
-// #define _CII XP(LCII,UCII)
-// #define _CIO XP(LCIO,UCIO)
-// #define _CIU XP(LCIU,UCIU)
-// #define _DIA XP(LDIA,UDIA)
-// #define _DIE XP(LDIE,UDIE)
-// #define _DII XP(LDII,UDII)
-// #define _DIN XP(LDIN,UDIN)
-// #define _DIO XP(LDIO,UDIO)
-// #define _DIU XP(LDIU,UDIU)
-// #define _CEC XP(LCEC,UCEC)
-// #define _TIN XP(LTIN,UTIN)
-// #define _EUR XP(LEUR,UEUR)
-
-
-// #define _ACE UC(0x00E9)
-// #define _GRA UC(0x00E9)
-// #define _GRE UC(0x00E9)
-// #define _GRU UC(0x00E9)
-// #define _CIA UC(0x00E9)
-// #define _CIE UC(0x00E9)
-// #define _CII UC(0x00E9)
-// #define _CIO UC(0x00E9)
-// #define _CIU UC(0x00E9)
-// #define _DIA UC(0x00E9)
-// #define _DIE UC(0x00E9)
-// #define _DII UC(0x00E9)
-// #define _DIN UC(0x00E9)
-// #define _DIO UC(0x00E9)
-// #define _DIU UC(0x00E9)
-// #define _CEC UC(0x00E9)
-// #define _TIN UC(0x00E9)
-// #define _EUR UC(0x00E9)
-
 enum layers {
   _BSE,
   _SYM,
@@ -243,18 +116,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                       //`--------------------------'  `--------------------------'
   ),
 
-//   [_SYM] = LAYOUT_split_3x6_3(
-//   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-//       XXXXXXX, KC_EXLM,  KC_AT , KC_HASH, KC_DLR , KC_PERC,                      KC_CIRC, KC_LCBR, KC_RCBR,  KC_LT ,  KC_GT , XXXXXXX,
-//   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-//       XXXXXXX, KC_LSFT, KC_LOPT, KC_LCMD, KC_BTN1, KC_BTN2,                      KC_AMPR, KC_LPRN, KC_RPRN, KC_LBRC, KC_RBRC, XXXXXXX,
-//   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-//       XXXXXXX, KC_TILD, KC_CUT , KC_COPY, KC_PSTE, KC_GRV ,                      KC_ASTR, KC_LEFT, KC_DOWN,  KC_UP , KC_RGHT, XXXXXXX,
-//   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-//                                           XXXXXXX, XXXXXXX, XXXXXXX,    KC_SPC ,MO(_NUM), KC_TAB 
-//                                       //`--------------------------'  `--------------------------'
-//   ),
-
   [_NUM] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
       XXXXXXX, XXXXXXX,_CTLnTAB,_CMDnTAB, _CMDnT , KC_ESC ,                      KC_PPLS,  KC_7  ,  KC_8  ,  KC_9  , KC_PAST, XXXXXXX,
@@ -279,25 +140,6 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
                                       //`--------------------------'  `--------------------------'
   ),
 };
-
-// // for "_NUM_TAB" key, I want layer "_NUM" to be activated right when the key is pressed
-// // but if no other key is pressed, I want KC_TAB to be sent
-// // uint16_t get_tapping_term(uint16_t keycode, keyrecord_t *record) {
-// //     switch (keycode) {
-// //         case _NUM_TAB:
-// //             return 5;
-// //         default:
-// //             return TAPPING_TERM;
-// //     }
-// // }
-// // bool get_retro_tapping(uint16_t keycode, keyrecord_t *record) {
-// //     switch (keycode) {
-// //         case _NUM_TAB:
-// //             return true;
-// //         default:
-// //             return false;
-// //     }
-// // }
 
 uint8_t my_mods;
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
@@ -364,12 +206,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 return false;
             }
           break;
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    
         case _ACE:
             if (record->event.pressed) {
                 unregister_mods(MOD_MASK_SHIFT);
