@@ -116,6 +116,10 @@ const uint32_t PROGMEM unicode_map[] = {
 #define _CMD_MNS  LCMD_T(KC_MINS)
 #define _FNC_SPC  LT(_FCT,KC_SPC)
 #define _NUM_TAB  LT(_NUM,KC_TAB)
+// combos
+#define _CTLnTAB  LCTL(KC_TAB)
+#define _CMDnTAB  LCMD(KC_TAB)
+#define _CMDnT  LCMD(KC_T)
 // special chars
 #define _ACE XP(LACE,UACE)
 #define _GRA XP(LGRA,UGRA)
@@ -154,17 +158,17 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
         KC_Z ,   KC_X ,   KC_C ,   KC_D ,   KC_V ,                        KC_K ,   KC_M , KC_COMM,  KC_DOT, KC_SLSH,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                TO(_SYM), KC_LSFT, KC_ENT ,   TO(_NUM), KC_SPC ,MO(_LNG)
+                                TO(_NUM), KC_LSFT, KC_ENT ,   MO(_SYM), KC_SPC ,MO(_LNG)
                              //`--------------------------'  `--------------------------'
   ),
 
 [_LNG] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-        _CIA , KC_PIPE, KC_UNDS, KC_DQUO, KC_ESC ,                        _DIU ,   _CIU ,   _GRU ,   _DII ,   _DIO ,
+        _CIA , KC_TILD, KC_UNDS, KC_DQUO, KC_ESC ,                        _DIU ,   _CIU ,   _GRU ,   _DII ,   _DIO ,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
      _CTL_GRA,_OPT_GRV,_CMD_MNS, KC_QUOT, KC_ENT ,                        _TIN ,   _GRE ,   _ACE ,   _CII ,   _CIO ,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-        _DIA , KC_TILD,   _CEC , KC_BSLS, KC_TAB ,                        _EUR ,   KC_M ,   _CIE ,   _DIE , XXXXXXX,
+        _DIA , XXXXXXX,   _CEC , KC_BSLS, KC_TAB ,                        _EUR ,   KC_M ,   _CIE ,   _DIE , XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
                                  KC_DEL , KC_LSFT, KC_BSPC,    XXXXXXX, XXXXXXX, XXXXXXX
                              //`--------------------------'  `--------------------------'
@@ -174,23 +178,23 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,--------------------------------------------.                    ,--------------------------------------------.
       KC_EXLM,  KC_AT , KC_HASH, KC_DLR , KC_ESC ,                      KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_EQL ,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      KC_LCTL, KC_LOPT, KC_LCMD, KC_BTN1, KC_ENT ,                      KC_LPRN, KC_RPRN,  KC_UP , KC_LBRC, KC_RBRC,
+      KC_LCTL, KC_LOPT, KC_LCMD, KC_PIPE, KC_ENT ,                      KC_LPRN, KC_RPRN,  KC_UP , KC_LBRC, KC_RBRC,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      KC_CUT , KC_COPY, KC_PSTE, KC_BTN2, KC_TAB ,                       KC_LT , KC_LEFT, KC_DOWN, KC_RGHT,  KC_GT ,
+      KC_CUT , KC_COPY, KC_PSTE, XXXXXXX, KC_TAB ,                       KC_LT , KC_LEFT, KC_DOWN, KC_RGHT,  KC_GT ,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                MO(_SYM), KC_LSFT, KC_BSPC,    KC_DEL , KC_SPC ,TO(_BSE)
+                                MO(_FCT), KC_LSFT, KC_BSPC,    XXXXXXX, XXXXXXX, XXXXXXX
                              //`--------------------------'  `--------------------------'
   ),
 
 [_NUM] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_ESC ,                      KC_PPLS,  KC_7  ,  KC_8  ,  KC_9  , KC_PAST,
+      XXXXXXX,_CTLnTAB,_CMDnTAB, _CMDnT , KC_ESC ,                      KC_PPLS,  KC_7  ,  KC_8  ,  KC_9  , KC_PAST,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      KC_LCTL, KC_LOPT, KC_LCMD, KC_PDOT, KC_ENT ,                       KC_0  ,  KC_4  ,  KC_5  ,  KC_6  , KC_PEQL,
+      KC_LCTL, KC_LOPT, KC_LCMD, KC_BTN1, KC_ENT ,                       KC_0  ,  KC_4  ,  KC_5  ,  KC_6  , KC_PEQL,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_TAB ,                      KC_PMNS,  KC_1  ,  KC_2  ,  KC_3  , KC_PSLS,
+      KC_CUT , KC_COPY, KC_PSTE, KC_BTN2, KC_TAB ,                      KC_PMNS,  KC_1  ,  KC_2  ,  KC_3  , KC_PSLS,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                 XXXXXXX, KC_LSFT, KC_BSPC,    KC_COMM, KC_SPC ,TO(_BSE)
+                                 KC_COMM, KC_LSFT, KC_BSPC,    KC_PDOT, KC_SPC ,TO(_BSE)
                              //`--------------------------'  `--------------------------'
   ),
 
@@ -202,7 +206,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_TAB ,                      XXXXXXX, KC_F1  , KC_F2  , KC_F3  , KC_F4  ,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                 XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, KC_SPC , XXXXXXX
+                                 XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX
                              //`--------------------------'  `--------------------------'
   ),
 };
