@@ -21,90 +21,90 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 // special chars
 // U / L : upper / lower
-enum unicode_names {
-    // accute accents
-    UACE,
-    LACE,
-    // grave accents
-    UGRA,
-    LGRA,
-    UGRE,
-    LGRE,
-    UGRU,
-    LGRU,
-    // circumflex accents
-    UCIA,
-    LCIA,
-    UCIE,
-    LCIE,
-    UCII,
-    LCII,
-    UCIO,
-    LCIO,
-    UCIU,
-    LCIU,
-    // diaeresis
-    UDIA,
-    LDIA,
-    UDIE,
-    LDIE,
-    UDII,
-    LDII,
-    UDIN,
-    LDIN,
-    UDIO,
-    LDIO,
-    UDIU,
-    LDIU,
-    // cedilla
-    UCEC,
-    LCEC,
-    //tilde
-    UTIN,
-    LTIN,
-    // euro
-    UEUR,
-    LEUR
-};
+// enum unicode_names {
+//     // accute accents
+//     UACE,
+//     LACE,
+//     // grave accents
+//     UGRA,
+//     LGRA,
+//     UGRE,
+//     LGRE,
+//     UGRU,
+//     LGRU,
+//     // circumflex accents
+//     UCIA,
+//     LCIA,
+//     UCIE,
+//     LCIE,
+//     UCII,
+//     LCII,
+//     UCIO,
+//     LCIO,
+//     UCIU,
+//     LCIU,
+//     // diaeresis
+//     UDIA,
+//     LDIA,
+//     UDIE,
+//     LDIE,
+//     UDII,
+//     LDII,
+//     UDIN,
+//     LDIN,
+//     UDIO,
+//     LDIO,
+//     UDIU,
+//     LDIU,
+//     // cedilla
+//     UCEC,
+//     LCEC,
+//     //tilde
+//     UTIN,
+//     LTIN,
+//     // euro
+//     UEUR,
+//     LEUR
+// };
 
-const uint32_t PROGMEM unicode_map[] = {
-    [UACE] = 0x00E9,
-    [LACE] = 0x00E9,
-    [UGRA] = 0x00E1,
-    [LGRA] = 0x00E1,
-    [UGRE] = 0x00E8,
-    [LGRE] = 0x00E8,
-    [UGRU] = 0x00F9,
-    [LGRU] = 0x00F9,
-    [UCIA] = 0x00E2,
-    [LCIA] = 0x00E2,
-    [UCIE] = 0x00EA,
-    [LCIE] = 0x00EA,
-    [UCII] = 0x0EFE,
-    [LCII] = 0x0EFE,
-    [UCIO] = 0x00F4,
-    [LCIO] = 0x00F4,
-    [UCIU] = 0x00FB,
-    [LCIU] = 0x00FB,
-    [UDIA] = 0x00E4,
-    [LDIA] = 0x00E4,
-    [UDIE] = 0x00EE,
-    [LDIE] = 0x00EE,
-    [UDII] = 0x00EF,
-    [LDII] = 0x00EF,
-    [UDIN] = 0x00F1,
-    [LDIN] = 0x00F1,
-    [UDIO] = 0x00F6,
-    [LDIO] = 0x00F6,
-    [UDIU] = 0x00FC,
-    [LDIU] = 0x00FC,
-    [UCEC] = 0x00E7,
-    [LCEC] = 0x00E7,
-    [UTIN] = 0x00F1,
-    [LTIN] = 0x00F1,
-    [UEUR] = 0x20AC,
-    [LEUR] = 0x20AC
-};
+// const uint32_t PROGMEM unicode_map[] = {
+//     [UACE] = 0x00E9,
+//     [LACE] = 0x00E9,
+//     [UGRA] = 0x00E1,
+//     [LGRA] = 0x00E1,
+//     [UGRE] = 0x00E8,
+//     [LGRE] = 0x00E8,
+//     [UGRU] = 0x00F9,
+//     [LGRU] = 0x00F9,
+//     [UCIA] = 0x00E2,
+//     [LCIA] = 0x00E2,
+//     [UCIE] = 0x00EA,
+//     [LCIE] = 0x00EA,
+//     [UCII] = 0x0EFE,
+//     [LCII] = 0x0EFE,
+//     [UCIO] = 0x00F4,
+//     [LCIO] = 0x00F4,
+//     [UCIU] = 0x00FB,
+//     [LCIU] = 0x00FB,
+//     [UDIA] = 0x00E4,
+//     [LDIA] = 0x00E4,
+//     [UDIE] = 0x00EE,
+//     [LDIE] = 0x00EE,
+//     [UDII] = 0x00EF,
+//     [LDII] = 0x00EF,
+//     [UDIN] = 0x00F1,
+//     [LDIN] = 0x00F1,
+//     [UDIO] = 0x00F6,
+//     [LDIO] = 0x00F6,
+//     [UDIU] = 0x00FC,
+//     [LDIU] = 0x00FC,
+//     [UCEC] = 0x00E7,
+//     [LCEC] = 0x00E7,
+//     [UTIN] = 0x00F1,
+//     [LTIN] = 0x00F1,
+//     [UEUR] = 0x20AC,
+//     [LEUR] = 0x20AC
+// };
 
 // hold/press keys
 #define _CTL_A  LCTL_T(KC_A)
@@ -112,7 +112,7 @@ const uint32_t PROGMEM unicode_map[] = {
 #define _CTL_O  LCTL_T(KC_O)
 #define _OPT_R  LOPT_T(KC_R)
 #define _OPT_I  LOPT_T(KC_I)
-#define _OPT_GRV  LOPT_T(KC_GRV)
+#define _OPT_UDS  LOPT_T(KC_UNDS)
 #define _CMD_S  LCMD_T(KC_S)
 #define _CMD_E  LCMD_T(KC_E)
 #define _CMD_MNS  LCMD_T(KC_MINS)
@@ -125,10 +125,39 @@ const uint32_t PROGMEM unicode_map[] = {
 #define _CMDnX  LCMD(KC_X)
 #define _CMDnC  LCMD(KC_C)
 #define _CMDnV  LCMD(KC_V)
-//dead keys
-#define _DQUOT
-#define _CIRC
-#define _TILDE
+
+enum my_keycodes {
+    // dead keys
+    DQUOT = SAFE_RANGE,
+    CIRC,
+    TILDE,
+
+    // accute accents
+    _ACE,
+    // grave accents
+    _GRA,
+    _GRE,
+    _GRU,
+    // circumflex accents
+    _CIA,
+    _CIE,
+    _CII,
+    _CIO,
+    _CIU,
+    // diaeresis
+    _DIA,
+    _DIE,
+    _DII,
+    _DIN,
+    _DIO,
+    _DIU,
+    // cedilla
+    _CEC,
+    //tilde
+    _TIN,
+    // euro
+    _EUR
+};
 
 // special chars
 // #define _ACE XP(LACE,UACE)
@@ -151,24 +180,24 @@ const uint32_t PROGMEM unicode_map[] = {
 // #define _EUR XP(LEUR,UEUR)
 
 
-#define _ACE UC(0x00E9)
-#define _GRA UC(0x00E9)
-#define _GRE UC(0x00E9)
-#define _GRU UC(0x00E9)
-#define _CIA UC(0x00E9)
-#define _CIE UC(0x00E9)
-#define _CII UC(0x00E9)
-#define _CIO UC(0x00E9)
-#define _CIU UC(0x00E9)
-#define _DIA UC(0x00E9)
-#define _DIE UC(0x00E9)
-#define _DII UC(0x00E9)
-#define _DIN UC(0x00E9)
-#define _DIO UC(0x00E9)
-#define _DIU UC(0x00E9)
-#define _CEC UC(0x00E9)
-#define _TIN UC(0x00E9)
-#define _EUR UC(0x00E9)
+// #define _ACE UC(0x00E9)
+// #define _GRA UC(0x00E9)
+// #define _GRE UC(0x00E9)
+// #define _GRU UC(0x00E9)
+// #define _CIA UC(0x00E9)
+// #define _CIE UC(0x00E9)
+// #define _CII UC(0x00E9)
+// #define _CIO UC(0x00E9)
+// #define _CIU UC(0x00E9)
+// #define _DIA UC(0x00E9)
+// #define _DIE UC(0x00E9)
+// #define _DII UC(0x00E9)
+// #define _DIN UC(0x00E9)
+// #define _DIO UC(0x00E9)
+// #define _DIU UC(0x00E9)
+// #define _CEC UC(0x00E9)
+// #define _TIN UC(0x00E9)
+// #define _EUR UC(0x00E9)
 
 enum layers {
   _BSE,
@@ -193,19 +222,19 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   
   [_LNG] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      XXXXXXX,   _CIA , KC_TILD, KC_UNDS, KC_DQUO, KC_ESC ,                        _DIU ,   _CIU ,   _GRU ,   _DII ,   _DIO , XXXXXXX,
+      XXXXXXX,   _CIA ,  TILDE , KC_UNDS,  DQUOT , KC_ESC ,                        _DIU ,   _CIU ,   _GRU ,   _DII ,   _DIO , XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      XXXXXXX,_CTL_GRA,_OPT_GRV,_CMD_MNS, KC_QUOT, KC_ENT ,                        _TIN ,   _GRE ,   _ACE ,   _CII ,   _CIO , XXXXXXX,
+      XXXXXXX,   _GRA , KC_GRV , KC_MINS, KC_QUOT, KC_ENT ,                        _TIN ,   _GRE ,   _ACE ,   _CII ,   _CIO , XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       XXXXXXX,   _DIA , XXXXXXX,   _CEC , KC_BSLS, KC_TAB ,                        _EUR ,   KC_M ,   _CIE ,   _DIE , UC_M_MA, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_DEL , KC_LSFT, KC_BSPC,    XXXXXXX, XXXXXXX, XXXXXXX
+                                          KC_DEL , KC_LSFT, KC_BSPC,    QK_BOOT, XXXXXXX, XXXXXXX
                                       //`--------------------------'  `--------------------------'
   ),
 
   [_SYM] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      XXXXXXX, KC_EXLM,  KC_AT , KC_HASH, KC_DLR , KC_ESC ,                      KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_EQL , XXXXXXX,
+      XXXXXXX, KC_EXLM,  KC_AT , KC_HASH, KC_DLR , KC_ESC ,                      KC_PERC, CIRC, KC_AMPR, KC_ASTR, KC_EQL , XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       XXXXXXX, KC_LCTL, KC_LOPT, KC_LCMD, KC_PIPE, KC_ENT ,                      KC_LPRN, KC_RPRN,  KC_UP , KC_LBRC, KC_RBRC, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
@@ -309,41 +338,67 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 return false;
             }
           break;
-        // case KC_TILD:
-        //     if (record->event.pressed) {
-        //         register_code(KC_TILD);
-        //         unregister_code(KC_TILD);
-        //         register_code(KC_SPC);
-        //         unregister_code(KC_SPC);
-        //         return false;
-        //     } else {
-        //         return false;
-        //     }
-        //   break;
-        // case KC_DQUO:
-        //     if (record->event.pressed) {
-        //         register_code(KC_DQUO);
-        //         unregister_code(KC_DQUO);
-        //         register_code(KC_SPC);
-        //         unregister_code(KC_SPC);
-        //         return false;
-        //     } else {
-        //         return false;
-        //     }
-        //   break;
-        // case _CIRC:
-        //     if (get_mods() & MOD_BIT(KC_LSFT)) {
-        //         if (record->event.pressed) {
-        //             register_code(KC_CIRC);
-        //             unregister_code(KC_CIRC);
-        //             register_code(KC_SPC);
-        //             unregister_code(KC_SPC);
-        //             return false;
-        //         } else {
-        //             return false;
-        //         }
-        //     }
-        //   break;
+        case TILDE:
+            if (record->event.pressed) {
+                register_code(KC_LSFT);
+                register_code(KC_GRV);
+                unregister_code(KC_GRV);
+                unregister_code(KC_LSFT);
+                register_code(KC_SPC);
+                unregister_code(KC_SPC);
+                return false;
+            } else {
+                return false;
+            }
+          break;
+        case DQUOT:
+            if (record->event.pressed) {
+                register_code(KC_LSFT);
+                register_code(KC_QUOT);
+                unregister_code(KC_QUOT);
+                unregister_code(KC_LSFT);
+                register_code(KC_SPC);
+                unregister_code(KC_SPC);
+                return false;
+            } else {
+                return false;
+            }
+          break;
+        case CIRC:
+            if (record->event.pressed) {
+                register_code(KC_LSFT);
+                register_code(KC_6);
+                unregister_code(KC_6);
+                unregister_code(KC_LSFT);
+                register_code(KC_SPC);
+                unregister_code(KC_SPC);
+                return false;
+            } else {
+                return false;
+            }
+          break;
+
+
+
+
+    // _ACE
+    // _GRA
+    // _GRE
+    // _GRU
+    // _CIA
+    // _CIE
+    // _CII
+    // _CIO
+    // _CIU
+    // _DIA
+    // _DIE
+    // _DII
+    // _DIN
+    // _DIO
+    // _DIU
+    // _CEC
+    // _TIN
+    // _EUR
   }
   return true;
 }
