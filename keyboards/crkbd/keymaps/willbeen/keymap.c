@@ -372,8 +372,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     
         case _ACE:
             if (record->event.pressed) {
-                add_oneshot_mods(MOD_MASK_SHIFT);
+                unregister_mods(MOD_MASK_SHIFT);
                 tap_code(KC_QUOT);
+                set_mods(my_mods);
                 tap_code(KC_E);
                 return false;
             } else {
