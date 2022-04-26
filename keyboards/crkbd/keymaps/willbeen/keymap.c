@@ -148,7 +148,6 @@ enum my_keycodes {
     _DIA,
     _DIE,
     _DII,
-    _DIN,
     _DIO,
     _DIU,
     // cedilla
@@ -301,14 +300,14 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 // // }
 
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    // my_mods = get_mods()
   
     switch (keycode) {
         case KC_PDOT:
             if (get_mods() & MOD_BIT(KC_LSFT)) {
                 if (record->event.pressed) {
                     unregister_code(KC_LSFT);
-                    register_code(KC_COMM);
-                    unregister_code(KC_COMM);
+                    tap_code(KC_COMM);
                     register_code(KC_LSFT);
                     return false;
                 } else {
@@ -318,10 +317,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           break;
         case KC_QUOT:
             if (record->event.pressed) {
-                register_code(KC_QUOT);
-                unregister_code(KC_QUOT);
-                register_code(KC_SPC);
-                unregister_code(KC_SPC);
+                tap_code(KC_QUOT);
+                tap_code(KC_SPC);
                 return false;
             } else {
                 return false;
@@ -329,10 +326,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           break;
         case KC_GRV:
             if (record->event.pressed) {
-                register_code(KC_GRV);
-                unregister_code(KC_GRV);
-                register_code(KC_SPC);
-                unregister_code(KC_SPC);
+                tap_code(KC_GRV);
+                tap_code(KC_SPC);
                 return false;
             } else {
                 return false;
@@ -341,11 +336,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case TILDE:
             if (record->event.pressed) {
                 register_code(KC_LSFT);
-                register_code(KC_GRV);
-                unregister_code(KC_GRV);
+                tap_code(KC_GRV);
                 unregister_code(KC_LSFT);
-                register_code(KC_SPC);
-                unregister_code(KC_SPC);
+                tap_code(KC_SPC);
                 return false;
             } else {
                 return false;
@@ -354,11 +347,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case DQUOT:
             if (record->event.pressed) {
                 register_code(KC_LSFT);
-                register_code(KC_QUOT);
-                unregister_code(KC_QUOT);
+                tap_code(KC_QUOT);
                 unregister_code(KC_LSFT);
-                register_code(KC_SPC);
-                unregister_code(KC_SPC);
+                tap_code(KC_SPC);
                 return false;
             } else {
                 return false;
@@ -367,11 +358,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case CIRC:
             if (record->event.pressed) {
                 register_code(KC_LSFT);
-                register_code(KC_6);
-                unregister_code(KC_6);
+                tap_code(KC_6);
                 unregister_code(KC_LSFT);
-                register_code(KC_SPC);
-                unregister_code(KC_SPC);
+                tap_code(KC_SPC);
                 return false;
             } else {
                 return false;
@@ -379,26 +368,189 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           break;
 
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-
-    // _ACE
-    // _GRA
-    // _GRE
-    // _GRU
-    // _CIA
-    // _CIE
-    // _CII
-    // _CIO
-    // _CIU
-    // _DIA
-    // _DIE
-    // _DII
-    // _DIN
-    // _DIO
-    // _DIU
-    // _CEC
-    // _TIN
-    // _EUR
-  }
-  return true;
+    
+        case _ACE:
+            if (record->event.pressed) {
+                tap_code(KC_QUOT);
+                tap_code(KC_E);
+                return false;
+            } else {
+                return false;
+            }
+          break;
+        case _GRA:
+            if (record->event.pressed) {
+                tap_code(KC_GRV);
+                tap_code(KC_A);
+                return false;
+            } else {
+                return false;
+            }
+          break;
+        case _GRE:
+            if (record->event.pressed) {
+                tap_code(KC_GRV);
+                tap_code(KC_E);
+                return false;
+            } else {
+                return false;
+            }
+          break;
+        case _GRU:
+            if (record->event.pressed) {
+                tap_code(KC_GRV);
+                tap_code(KC_U);
+                return false;
+            } else {
+                return false;
+            }
+          break;
+        case _CIA:
+            if (record->event.pressed) {
+                register_code(KC_LSFT);
+                tap_code(KC_6);
+                unregister_code(KC_LSFT);
+                tap_code(KC_A);
+                return false;
+            } else {
+                return false;
+            }
+          break;
+        case _CIE:
+            if (record->event.pressed) {
+                register_code(KC_LSFT);
+                tap_code(KC_6);
+                unregister_code(KC_LSFT);
+                tap_code(KC_E);
+                return false;
+            } else {
+                return false;
+            }
+          break;
+        case _CII:
+            if (record->event.pressed) {
+                register_code(KC_LSFT);
+                tap_code(KC_6);
+                unregister_code(KC_LSFT);
+                tap_code(KC_I);
+                return false;
+            } else {
+                return false;
+            }
+          break;
+        case _CIO:
+            if (record->event.pressed) {
+                register_code(KC_LSFT);
+                tap_code(KC_6);
+                unregister_code(KC_LSFT);
+                tap_code(KC_O);
+                return false;
+            } else {
+                return false;
+            }
+          break;
+        case _CIU:
+            if (record->event.pressed) {
+                register_code(KC_LSFT);
+                tap_code(KC_6);
+                unregister_code(KC_LSFT);
+                tap_code(KC_U);
+                return false;
+            } else {
+                return false;
+            }
+          break;
+        case _DIA:
+            if (record->event.pressed) {
+                register_code(KC_LSFT);
+                tap_code(KC_QUOT);
+                unregister_code(KC_LSFT);
+                tap_code(KC_A);
+                return false;
+            } else {
+                return false;
+            }
+          break;
+        case _DIE:
+            if (record->event.pressed) {
+                register_code(KC_LSFT);
+                tap_code(KC_QUOT);
+                unregister_code(KC_LSFT);
+                tap_code(KC_E);
+                return false;
+            } else {
+                return false;
+            }
+          break;
+        case _DII:
+            if (record->event.pressed) {
+                register_code(KC_LSFT);
+                tap_code(KC_QUOT);
+                unregister_code(KC_LSFT);
+                tap_code(KC_I);
+                return false;
+            } else {
+                return false;
+            }
+          break;
+        case _DIO:
+            if (record->event.pressed) {
+                register_code(KC_LSFT);
+                tap_code(KC_QUOT);
+                unregister_code(KC_LSFT);
+                tap_code(KC_O);
+                return false;
+            } else {
+                return false;
+            }
+          break;
+        case _DIU:
+            if (record->event.pressed) {
+                register_code(KC_LSFT);
+                tap_code(KC_QUOT);
+                unregister_code(KC_LSFT);
+                tap_code(KC_U);
+                return false;
+            } else {
+                return false;
+            }
+          break;
+        case _CEC:
+            if (record->event.pressed) {
+                register_code(KC_LOPT);
+                tap_code(KC_C);
+                unregister_code(KC_LOPT);
+                return false;
+            } else {
+                return false;
+            }
+          break;
+        case _TIN:
+            if (record->event.pressed) {
+                register_code(KC_LSFT);
+                tap_code(KC_GRV);
+                unregister_code(KC_LSFT);
+                tap_code(KC_N);
+                return false;
+            } else {
+                return false;
+            }
+          break;
+        case _EUR:
+            if (record->event.pressed) {
+                register_code(KC_LSFT);
+                register_code(KC_LOPT);
+                tap_code(KC_2);
+                unregister_code(KC_LOPT);
+                unregister_code(KC_LSFT);
+                return false;
+            } else {
+                return false;
+            }
+          break;
+    }
+    return true;
 }
