@@ -100,7 +100,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       XXXXXXX,   _DIA , XXXXXXX,   _CEC , KC_BSLS, KC_TAB ,                        _EUR ,   KC_M ,   _CIE ,   _DIE , UC_M_MA, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                          KC_DEL , KC_LSFT, KC_BSPC,    QK_BOOT, XXXXXXX, XXXXXXX
+                                          KC_LCTL, KC_LSFT, KC_BSPC,    QK_BOOT, XXXXXXX, XXXXXXX
                                       //`--------------------------'  `--------------------------'
   ),
 
