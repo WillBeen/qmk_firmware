@@ -127,11 +127,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
       XXXXXXX,TO(_BSE), _CTLnTAB,_CMDnTAB, _CMDnT , KC_ESC ,                      KC_PPLS,  KC_7  ,  KC_8  ,  KC_9  , KC_PAST, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      XXXXXXX, KC_LCTL, KC_LOPT, KC_LCMD, KC_BTN1, KC_ENT ,                       KC_0  ,  KC_4  ,  KC_5  ,  KC_6  , KC_PEQL, XXXXXXX,
+      XXXXXXX, KC_LCTL, KC_LOPT, KC_LCMD, KC_BTN1, KC_ENT ,                      KC_PDOT,  KC_4  ,  KC_5  ,  KC_6  , KC_PEQL, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       XXXXXXX, _CMDnX , _CMDnC , _CMDnV , KC_BTN2, KC_TAB ,                      KC_PMNS,  KC_1  ,  KC_2  ,  KC_3  , KC_PSLS, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                         MO(_MSE), KC_LSFT, KC_BSPC,    KC_PDOT, KC_SPC ,TO(_BSE)
+                                         MO(_MSE), KC_LSFT, KC_BSPC,     KC_0  , KC_SPC ,TO(_BSE)
                                       //`--------------------------'  `--------------------------'
   ),
 
@@ -166,81 +166,83 @@ enum ostype {
     OS_MAC = SAFE_RANGE,
     OS_AND
 };
+enum accents {
+    _accent_aecu = SAFE_RANGE,
+    _accent_grav,
+    _accent_circ,
+    _accent_diae,
+    _accent_tild
+};
 int my_ostype = OS_MAC;
-void aecute(uint16_t keycode, bool pressed, uint8_t my_mods, int ostype) {
-    switch (ostype) {
-        case OS_MAC:
-            if (pressed) {
-                unregister_mods(MOD_MASK_SHIFT);
-                tap_code(KC_QUOT);
-                set_mods(my_mods);
-                tap_code(keycode);
-            }
-            break;
-        case OS_AND:
-            if (pressed) {
-                add_oneshot_mods(MOD_MASK_ALT);
-                tap_code(KC_E);
-                tap_code(keycode);
-            }
-            break;
-    }
-}
-void grave(uint16_t keycode, bool pressed, uint8_t my_mods, int ostype) {
-    switch (ostype) {
-        case OS_MAC:
-            if (pressed) {
-                unregister_mods(MOD_MASK_SHIFT);
-                tap_code(KC_GRV);
-                set_mods(my_mods);
-                tap_code(keycode);
-            }
-            break;
-        case OS_AND:
-            if (pressed) {
-                unregister_mods(MOD_MASK_SHIFT);
-                add_oneshot_mods(MOD_MASK_ALT);
-                tap_code(KC_GRV);
-                set_mods(my_mods);
-                tap_code(keycode);
-            }
-            break;
-    }
-}
-void circumflex(uint16_t keycode, bool pressed, uint8_t my_mods, int ostype) {
-    switch (ostype) {
-        case OS_MAC:
-            if (pressed) {
-                add_oneshot_mods(MOD_MASK_SHIFT);
-                tap_code(KC_6);
-                tap_code(keycode);
-            }
-            break;
-        case OS_AND:
-            if (pressed) {
-                add_oneshot_mods(MOD_MASK_ALT);
-                tap_code(KC_I);
-                tap_code(keycode);
-            }
-            break;
-    }
-}
-void diaeresis(uint16_t keycode, bool pressed, uint8_t my_mods, int ostype) {
-    switch (ostype) {
-        case OS_MAC:
-            if (pressed) {
-                add_oneshot_mods(MOD_MASK_SHIFT);
-                tap_code(KC_QUOT);
-                tap_code(keycode);
-            }
-            break;
-        case OS_AND:
-            if (pressed) {
-                add_oneshot_mods(MOD_MASK_ALT);
-                tap_code(KC_U);
-                tap_code(keycode);
-            }
-            break;
+void accent_letter(int accent, uint16_t keycode, bool pressed, uint8_t my_mods, int ostype) {
+    if (pressed) {
+        switch (accent) {
+            case _accent_aecu:
+                switch (ostype) {
+                    case OS_MAC:
+                        unregister_mods(MOD_MASK_SHIFT);
+                        tap_code(KC_QUOT);
+                        set_mods(my_mods);
+                        break;
+                    case OS_AND:
+                        add_oneshot_mods(MOD_MASK_ALT);
+                        tap_code(KC_E);
+                        break;
+                }
+                break;
+            case _accent_grav:
+                switch (ostype) {
+                    case OS_MAC:
+                        unregister_mods(MOD_MASK_SHIFT);
+                        tap_code(KC_GRV);
+                        set_mods(my_mods);
+                        break;
+                    case OS_AND:
+                        unregister_mods(MOD_MASK_SHIFT);
+                        add_oneshot_mods(MOD_MASK_ALT);
+                        tap_code(KC_GRV);
+                        set_mods(my_mods);
+                        break;
+                    }
+                break;
+            case _accent_circ:
+                switch (ostype) {
+                    case OS_MAC:
+                        add_oneshot_mods(MOD_MASK_SHIFT);
+                        tap_code(KC_6);
+                        break;
+                    case OS_AND:
+                        add_oneshot_mods(MOD_MASK_ALT);
+                        tap_code(KC_I);
+                        break;
+                }
+                break;
+            case _accent_diae:
+                switch (ostype) {
+                    case OS_MAC:
+                        add_oneshot_mods(MOD_MASK_SHIFT);
+                        tap_code(KC_QUOT);
+                        break;
+                    case OS_AND:
+                        add_oneshot_mods(MOD_MASK_ALT);
+                        tap_code(KC_U);
+                        break;
+                }
+                break;
+            case _accent_tild:
+                switch (ostype) {
+                    case OS_MAC:
+                        add_oneshot_mods(MOD_MASK_SHIFT);
+                        tap_code(KC_GRV);
+                        break;
+                    case OS_AND:
+                        add_oneshot_mods(MOD_MASK_ALT);
+                        tap_code(KC_N);
+                        break;
+                }
+                break;
+        }
+        tap_code(keycode);
     }
 }
 void cedilla(bool pressed, uint8_t my_mods, int ostype) {
@@ -255,24 +257,6 @@ void cedilla(bool pressed, uint8_t my_mods, int ostype) {
             if (pressed) {
                 add_oneshot_mods(MOD_MASK_ALT);
                 tap_code(KC_C);
-            }
-            break;
-    }
-}
-void tilde(uint16_t keycode, bool pressed, uint8_t my_mods, int ostype) {
-    switch (ostype) {
-        case OS_MAC:
-            if (pressed) {
-                add_oneshot_mods(MOD_MASK_SHIFT);
-                tap_code(KC_GRV);
-                tap_code(KC_N);
-            }
-            break;
-        case OS_AND:
-            if (pressed) {
-                add_oneshot_mods(MOD_MASK_ALT);
-                tap_code(KC_N);
-                tap_code(keycode);
             }
             break;
     }
@@ -299,52 +283,52 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             my_ostype = OS_AND;
             break;
         case _ACE:
-          aecute(KC_E, record->event.pressed, my_mods, my_ostype);
+          accent_letter(_accent_aecu, KC_E, record->event.pressed, my_mods, my_ostype);
           break;
         case _GRA:
-          grave(KC_A, record->event.pressed, my_mods, my_ostype);
+          accent_letter(_accent_grav, KC_A, record->event.pressed, my_mods, my_ostype);
           break;
         case _GRE:
-          grave(KC_E, record->event.pressed, my_mods, my_ostype);
+          accent_letter(_accent_grav, KC_E, record->event.pressed, my_mods, my_ostype);
           break;
         case _GRU:
-          grave(KC_U, record->event.pressed, my_mods, my_ostype);
+          accent_letter(_accent_grav, KC_U, record->event.pressed, my_mods, my_ostype);
           break;
         case _CIA:
-          circumflex(KC_A, record->event.pressed, my_mods, my_ostype);
+          accent_letter(_accent_circ, KC_A, record->event.pressed, my_mods, my_ostype);
           break;
         case _CIE:
-          circumflex(KC_E, record->event.pressed, my_mods, my_ostype);
+          accent_letter(_accent_circ, KC_E, record->event.pressed, my_mods, my_ostype);
           break;
         case _CII:
-          circumflex(KC_I, record->event.pressed, my_mods, my_ostype);
+          accent_letter(_accent_circ, KC_I, record->event.pressed, my_mods, my_ostype);
           break;
         case _CIO:
-          circumflex(KC_O, record->event.pressed, my_mods, my_ostype);
+          accent_letter(_accent_circ, KC_O, record->event.pressed, my_mods, my_ostype);
           break;
         case _CIU:
-          circumflex(KC_U, record->event.pressed, my_mods, my_ostype);
+          accent_letter(_accent_circ, KC_U, record->event.pressed, my_mods, my_ostype);
           break;
         case _DIA:
-          diaeresis(KC_A, record->event.pressed, my_mods, my_ostype);
+          accent_letter(_accent_diae, KC_A, record->event.pressed, my_mods, my_ostype);
           break;
         case _DIE:
-          diaeresis(KC_E, record->event.pressed, my_mods, my_ostype);
+          accent_letter(_accent_diae, KC_E, record->event.pressed, my_mods, my_ostype);
           break;
         case _DII:
-          diaeresis(KC_I, record->event.pressed, my_mods, my_ostype);
+          accent_letter(_accent_diae, KC_I, record->event.pressed, my_mods, my_ostype);
           break;
         case _DIO:
-          diaeresis(KC_O, record->event.pressed, my_mods, my_ostype);
+          accent_letter(_accent_diae, KC_O, record->event.pressed, my_mods, my_ostype);
           break;
         case _DIU:
-          diaeresis(KC_U, record->event.pressed, my_mods, my_ostype);
+          accent_letter(_accent_diae, KC_U, record->event.pressed, my_mods, my_ostype);
           break;
         case _CEC:
           cedilla(record->event.pressed, my_mods, my_ostype);
           break;
         case _TIN:
-          tilde(KC_N, record->event.pressed, my_mods, my_ostype);
+          accent_letter(_accent_tild, KC_N, record->event.pressed, my_mods, my_ostype);
           break;
         case _EUR:
           euro(record->event.pressed, my_mods, my_ostype);
