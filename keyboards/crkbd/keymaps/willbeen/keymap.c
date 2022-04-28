@@ -385,7 +385,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           break;
         case KC_QUOT:
             if (record->event.pressed) {
+                unregister_mods(MOD_MASK_SHIFT);
                 tap_code(KC_QUOT);
+                set_mods(my_mods);
                 tap_code(KC_SPC);
                 return false;
             } else {
@@ -393,9 +395,31 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
           break;
         case KC_GRV:
-            if (record->event.pressed) {
+            if (record->event.pressed) {    
+                unregister_mods(MOD_MASK_SHIFT);
                 tap_code(KC_GRV);
+                set_mods(my_mods);
                 tap_code(KC_SPC);
+                return false;
+            } else {
+                return false;
+            }
+          break;
+        case KC_BSLS:
+            if (record->event.pressed) {    
+                unregister_mods(MOD_MASK_SHIFT);
+                tap_code(KC_BSLS);
+                set_mods(my_mods);
+                return false;
+            } else {
+                return false;
+            }
+          break;
+        case KC_MINS:
+            if (record->event.pressed) {    
+                unregister_mods(MOD_MASK_SHIFT);
+                tap_code(KC_MINS);
+                set_mods(my_mods);
                 return false;
             } else {
                 return false;
