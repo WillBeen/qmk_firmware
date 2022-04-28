@@ -68,7 +68,13 @@ enum my_keycodes {
     //tilde
     _TIN,
     // euro
-    _EUR
+    _EUR,
+    // mouse
+    _WHUP,
+    _WHDN,
+    // os selection
+    _MACOS,
+    _ANDRO
 };
 
 enum layers {
@@ -131,7 +137,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_MSE] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      XXXXXXX, XXXXXXX, KC_ACL0, KC_ACL1, KC_ACL2, KC_ESC ,                      XXXXXXX, KC_WH_L, KC_WH_D, KC_WH_U, KC_WH_R, XXXXXXX,
+      XXXXXXX, XXXXXXX, KC_ACL0, KC_ACL1, KC_ACL2, KC_ESC ,                      XXXXXXX, KC_WH_L,  _WHDN ,  _WHUP , KC_WH_R, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       XXXXXXX, KC_LCTL, KC_LOPT, KC_LCMD, KC_BTN1, KC_ENT ,                      XXXXXXX, XXXXXXX, KC_MS_U, XXXXXXX, XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
@@ -143,7 +149,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_FCT] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_ESC ,                      XXXXXXX, KC_F9  , KC_F10 , KC_F11 , KC_F12 , XXXXXXX,
+      XXXXXXX, XXXXXXX, _ANDRO , _MACOS , XXXXXXX, KC_ESC ,                      XXXXXXX, KC_F9  , KC_F10 , KC_F11 , KC_F12 , XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       XXXXXXX, KC_LCTL, KC_LOPT, KC_LCMD, KC_LSFT, KC_ENT ,                      XXXXXXX, KC_F5  , KC_F6  , KC_F7  , KC_F8  , XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
@@ -154,11 +160,233 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
 };
 
+
 uint8_t my_mods;
+enum ostype {
+    OS_MAC,
+    OS_AND
+};
+int my_ostype = OS_MAC;
+void aecute(uint16_t keycode, bool pressed, uint8_t my_mods, int ostype) {
+    switch (ostype) {
+        case OS_MAC:
+            if (pressed) {
+                unregister_mods(MOD_MASK_SHIFT);
+                tap_code(KC_QUOT);
+                set_mods(my_mods);
+                tap_code(keycode);
+            }
+            break;
+        case OS_AND:
+            if (pressed) {
+                add_oneshot_mods(MOD_MASK_ALT);
+                tap_code(KC_E);
+                tap_code(keycode);
+            }
+            break;
+    }
+}
+void grave(uint16_t keycode, bool pressed, uint8_t my_mods, int ostype) {
+    switch (ostype) {
+        case OS_MAC:
+            if (pressed) {
+                unregister_mods(MOD_MASK_SHIFT);
+                tap_code(KC_GRV);
+                set_mods(my_mods);
+                tap_code(keycode);
+            }
+            break;
+        case OS_AND:
+            if (pressed) {
+                unregister_mods(MOD_MASK_SHIFT);
+                add_oneshot_mods(MOD_MASK_ALT);
+                tap_code(KC_GRV);
+                set_mods(my_mods);
+                tap_code(keycode);
+            }
+            break;
+    }
+}
+void circumflex(uint16_t keycode, bool pressed, uint8_t my_mods, int ostype) {
+    switch (ostype) {
+        case OS_MAC:
+            if (pressed) {
+                add_oneshot_mods(MOD_MASK_SHIFT);
+                tap_code(KC_6);
+                tap_code(keycode);
+            }
+            break;
+        case OS_AND:
+            if (pressed) {
+                add_oneshot_mods(MOD_MASK_ALT);
+                tap_code(KC_I);
+                tap_code(keycode);
+            }
+            break;
+    }
+}
+void diaeresis(uint16_t keycode, bool pressed, uint8_t my_mods, int ostype) {
+    switch (ostype) {
+        case OS_MAC:
+            if (pressed) {
+                add_oneshot_mods(MOD_MASK_SHIFT);
+                tap_code(KC_QUOT);
+                tap_code(keycode);
+            }
+            break;
+        case OS_AND:
+            if (pressed) {
+                add_oneshot_mods(MOD_MASK_ALT);
+                tap_code(KC_U);
+                tap_code(keycode);
+            }
+            break;
+    }
+}
+void cedilla(bool pressed, uint8_t my_mods, int ostype) {
+    switch (ostype) {
+        case OS_MAC:
+            if (pressed) {
+                add_oneshot_mods(MOD_MASK_ALT);
+                tap_code(KC_C);
+            }
+            break;
+        case OS_AND:
+            if (pressed) {
+                add_oneshot_mods(MOD_MASK_ALT);
+                tap_code(KC_C);
+            }
+            break;
+    }
+}
+void tilde(uint16_t keycode, bool pressed, uint8_t my_mods, int ostype) {
+    switch (ostype) {
+        case OS_MAC:
+            if (pressed) {
+                add_oneshot_mods(MOD_MASK_SHIFT);
+                tap_code(KC_GRV);
+                tap_code(KC_N);
+            }
+            break;
+        case OS_AND:
+            if (pressed) {
+                add_oneshot_mods(MOD_MASK_ALT);
+                tap_code(KC_N);
+                tap_code(keycode);
+            }
+            break;
+    }
+}
+void euro(bool pressed, uint8_t my_mods, int ostype) {
+    switch (ostype) {
+        case OS_MAC:
+            if (pressed) {
+                add_oneshot_mods(MOD_MASK_SHIFT);
+                add_oneshot_mods(MOD_MASK_ALT);
+                tap_code(KC_2);
+            }
+            break;
+    }
+}
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     my_mods = get_mods();
   
     switch (keycode) {
+        case _MACOS:
+            my_ostype = OS_MAC;
+            break;
+        case _ANDRO:
+            my_ostype = OS_AND;
+            break;
+        case _ACE:
+          aecute(KC_E, record->event.pressed, my_mods, my_ostype);
+          break;
+        case _GRA:
+          grave(KC_A, record->event.pressed, my_mods, my_ostype);
+          break;
+        case _GRE:
+          grave(KC_E, record->event.pressed, my_mods, my_ostype);
+          break;
+        case _GRU:
+          grave(KC_U, record->event.pressed, my_mods, my_ostype);
+          break;
+        case _CIA:
+          circumflex(KC_A, record->event.pressed, my_mods, my_ostype);
+          break;
+        case _CIE:
+          circumflex(KC_E, record->event.pressed, my_mods, my_ostype);
+          break;
+        case _CII:
+          circumflex(KC_I, record->event.pressed, my_mods, my_ostype);
+          break;
+        case _CIO:
+          circumflex(KC_O, record->event.pressed, my_mods, my_ostype);
+          break;
+        case _CIU:
+          circumflex(KC_U, record->event.pressed, my_mods, my_ostype);
+          break;
+        case _DIA:
+          diaeresis(KC_A, record->event.pressed, my_mods, my_ostype);
+          break;
+        case _DIE:
+          diaeresis(KC_E, record->event.pressed, my_mods, my_ostype);
+          break;
+        case _DII:
+          diaeresis(KC_I, record->event.pressed, my_mods, my_ostype);
+          break;
+        case _DIO:
+          diaeresis(KC_O, record->event.pressed, my_mods, my_ostype);
+          break;
+        case _DIU:
+          diaeresis(KC_U, record->event.pressed, my_mods, my_ostype);
+          break;
+        case _CEC:
+          cedilla(record->event.pressed, my_mods, my_ostype);
+          break;
+        case _TIN:
+          tilde(KC_N, record->event.pressed, my_mods, my_ostype);
+          break;
+        case _EUR:
+          euro(record->event.pressed, my_mods, my_ostype);
+          break;
+        case _WHUP:
+            if (my_ostype == OS_MAC) {
+                if (record->event.pressed) {
+                    register_code(KC_WH_D);
+                    return false;
+                } else {
+                    unregister_code(KC_WH_D);
+                    return false;
+                }
+            } else {
+                if (record->event.pressed) {
+                    register_code(KC_WH_U);
+                    return false;
+                } else {
+                    unregister_code(KC_WH_U);
+                    return false;
+                }
+            }
+          break;
+        case _WHDN:
+            if (my_ostype == OS_MAC) {
+                if (record->event.pressed) {
+                    register_code(KC_WH_U);
+                    return false;
+                } else {
+                    unregister_code(KC_WH_U);
+                    return false;
+                }
+            } else {
+                if (record->event.pressed) {
+                    register_code(KC_WH_D);
+                    return false;
+                } else {
+                    unregister_code(KC_WH_D);
+                    return false;
+                }
+            }
+          break;
         case KC_PDOT:
             if (my_mods & MOD_BIT(KC_LSFT)) {
                 if (record->event.pressed) {
@@ -189,6 +417,16 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 return false;
             }
           break;
+        case CIRC:
+            if (record->event.pressed) {
+                add_oneshot_mods(MOD_MASK_SHIFT);
+                tap_code(KC_6);
+                tap_code(KC_SPC);
+                return false;
+            } else {
+                return false;
+            }
+          break;
         case TILDE:
             if (record->event.pressed) {
                 add_oneshot_mods(MOD_MASK_SHIFT);
@@ -204,189 +442,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 add_oneshot_mods(MOD_MASK_SHIFT);
                 tap_code(KC_QUOT);
                 tap_code(KC_SPC);
-                return false;
-            } else {
-                return false;
-            }
-          break;
-        case CIRC:
-            if (record->event.pressed) {
-                add_oneshot_mods(MOD_MASK_SHIFT);
-                tap_code(KC_6);
-                tap_code(KC_SPC);
-                return false;
-            } else {
-                return false;
-            }
-          break;
-        case _ACE:
-            if (record->event.pressed) {
-                unregister_mods(MOD_MASK_SHIFT);
-                tap_code(KC_QUOT);
-                set_mods(my_mods);
-                tap_code(KC_E);
-                return false;
-            } else {
-                return false;
-            }
-          break;
-        case _GRA:
-            if (record->event.pressed) {
-                unregister_mods(MOD_MASK_SHIFT);
-                tap_code(KC_GRV);
-                set_mods(my_mods);
-                tap_code(KC_A);
-                return false;
-            } else {
-                return false;
-            }
-          break;
-        case _GRE:
-            if (record->event.pressed) {
-                unregister_mods(MOD_MASK_SHIFT);
-                tap_code(KC_GRV);
-                set_mods(my_mods);
-                tap_code(KC_E);
-                return false;
-            } else {
-                return false;
-            }
-          break;
-        case _GRU:
-            if (record->event.pressed) {
-                unregister_mods(MOD_MASK_SHIFT);
-                tap_code(KC_GRV);
-                set_mods(my_mods);
-                tap_code(KC_U);
-                return false;
-            } else {
-                return false;
-            }
-          break;
-        case _CIA:
-            if (record->event.pressed) {
-                add_oneshot_mods(MOD_MASK_SHIFT);
-                tap_code(KC_6);
-                tap_code(KC_A);
-                return false;
-            } else {
-                return false;
-            }
-          break;
-        case _CIE:
-            if (record->event.pressed) {
-                add_oneshot_mods(MOD_MASK_SHIFT);
-                tap_code(KC_6);
-                tap_code(KC_E);
-                return false;
-            } else {
-                return false;
-            }
-          break;
-        case _CII:
-            if (record->event.pressed) {
-                add_oneshot_mods(MOD_MASK_SHIFT);
-                tap_code(KC_6);
-                tap_code(KC_I);
-                return false;
-            } else {
-                return false;
-            }
-          break;
-        case _CIO:
-            if (record->event.pressed) {
-                add_oneshot_mods(MOD_MASK_SHIFT);
-                tap_code(KC_6);
-                tap_code(KC_O);
-                return false;
-            } else {
-                return false;
-            }
-          break;
-        case _CIU:
-            if (record->event.pressed) {
-                add_oneshot_mods(MOD_MASK_SHIFT);
-                tap_code(KC_6);
-                tap_code(KC_U);
-                return false;
-            } else {
-                return false;
-            }
-          break;
-        case _DIA:
-            if (record->event.pressed) {
-                add_oneshot_mods(MOD_MASK_SHIFT);
-                tap_code(KC_QUOT);
-                tap_code(KC_A);
-                return false;
-            } else {
-                return false;
-            }
-          break;
-        case _DIE:
-            if (record->event.pressed) {
-                add_oneshot_mods(MOD_MASK_SHIFT);
-                tap_code(KC_QUOT);
-                tap_code(KC_E);
-                return false;
-            } else {
-                return false;
-            }
-          break;
-        case _DII:
-            if (record->event.pressed) {
-                add_oneshot_mods(MOD_MASK_SHIFT);
-                tap_code(KC_QUOT);
-                tap_code(KC_I);
-                return false;
-            } else {
-                return false;
-            }
-          break;
-        case _DIO:
-            if (record->event.pressed) {
-                add_oneshot_mods(MOD_MASK_SHIFT);
-                tap_code(KC_QUOT);
-                tap_code(KC_O);
-                return false;
-            } else {
-                return false;
-            }
-          break;
-        case _DIU:
-            if (record->event.pressed) {
-                add_oneshot_mods(MOD_MASK_SHIFT);
-                tap_code(KC_QUOT);
-                tap_code(KC_U);
-                return false;
-            } else {
-                return false;
-            }
-          break;
-        case _CEC:
-            if (record->event.pressed) {
-                add_oneshot_mods(MOD_MASK_ALT);
-                tap_code(KC_C);
-                return false;
-            } else {
-                return false;
-            }
-          break;
-        case _TIN:
-            if (record->event.pressed) {
-                add_oneshot_mods(MOD_MASK_SHIFT);
-                tap_code(KC_GRV);
-                tap_code(KC_N);
-                return false;
-            } else {
-                return false;
-            }
-          break;
-        case _EUR:
-            if (record->event.pressed) {
-                add_oneshot_mods(MOD_MASK_SHIFT);
-                add_oneshot_mods(MOD_MASK_ALT);
-                tap_code(KC_2);
                 return false;
             } else {
                 return false;
