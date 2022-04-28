@@ -7,5 +7,4 @@ LTO_ENABLE             = yes
 # special chars management
 # UNICODEMAP_ENABLE = yes
 
-
-
+BOOTMAGIC_ENABLE = yes

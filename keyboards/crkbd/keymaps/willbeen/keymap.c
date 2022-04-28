@@ -29,7 +29,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define _CMD_S  LCMD_T(KC_S)
 #define _CMD_E  LCMD_T(KC_E)
 #define _CMD_MNS  LCMD_T(KC_MINS)
-#define _FNC_SPC  LT(_FCT,KC_SPC)
+#define _LNG_SPC  LT(_LNG,KC_SPC)
 #define _NUM_TAB  LT(_NUM,KC_TAB)
 // combos
 #define _CTLnTAB  LCTL(KC_TAB)
@@ -77,7 +77,8 @@ enum my_keycodes {
     // os selection
     _MACOS,
     _ANDRO,
-    _DEADKEY // mandatory for password typing
+    _DEADKEY, // mandatory for password typing
+    test
 };
 
 enum layers {
@@ -98,7 +99,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       XXXXXXX,   KC_Z ,   KC_X ,   KC_C ,   KC_D ,   KC_V ,                        KC_K ,   KC_M , KC_COMM,  KC_DOT, KC_SLSH, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
-                                         TO(_NUM), KC_LSFT, KC_ENT ,   MO(_SYM), KC_SPC ,MO(_LNG)
+                                         TO(_NUM), KC_LSFT, KC_ENT ,   MO(_SYM), KC_SPC , MO(_LNG)
                                       //`--------------------------'  `--------------------------'
   ),
   
@@ -128,7 +129,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_NUM] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      XXXXXXX,TO(_BSE), _CTLnTAB,_CMDnTAB, _CMDnT , KC_ESC ,                      KC_PPLS,  KC_7  ,  KC_8  ,  KC_9  , KC_PAST, XXXXXXX,
+      XXXXXXX,TO(_BSE),_CTLnTAB,_CMDnTAB, _CMDnT , KC_ESC ,                      KC_PPLS,  KC_7  ,  KC_8  ,  KC_9  , KC_PAST, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       XXXXXXX, KC_LCTL, KC_LOPT, KC_LCMD, KC_BTN1, KC_ENT ,                      KC_PDOT,  KC_4  ,  KC_5  ,  KC_6  , KC_PEQL, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
@@ -296,6 +297,15 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     my_mods = get_mods();
   
     switch (keycode) {
+        case test:
+            if (record->event.pressed) {
+                register_mods(MOD_MASK_SHIFT);
+                register_code(KC_A);
+                unregister_mods(MOD_MASK_SHIFT);
+            } else {
+                unregister_code(KC_A);
+            }
+            break;
         case _MACOS:
             my_ostype = OS_MAC;
             break;
