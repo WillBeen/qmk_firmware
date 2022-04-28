@@ -163,7 +163,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 uint8_t my_mods;
 enum ostype {
-    OS_MAC,
+    OS_MAC = SAFE_RANGE,
     OS_AND
 };
 int my_ostype = OS_MAC;
