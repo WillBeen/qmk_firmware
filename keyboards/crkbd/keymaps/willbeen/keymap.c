@@ -67,6 +67,8 @@ enum my_keycodes {
     _CEC,
     //tilde
     _TIN,
+    // e in o
+    _OE,
     // euro
     _EUR,
     // mouse
@@ -106,7 +108,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       XXXXXXX,   _GRA , KC_GRV , KC_MINS, KC_QUOT, KC_ENT ,                        _TIN ,   _GRE ,   _ACE ,   _CII ,   _CIO , XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      XXXXXXX,   _DIA , XXXXXXX,   _CEC , KC_BSLS, KC_TAB ,                        _EUR ,   KC_M ,   _CIE ,   _DIE , UC_M_MA, XXXXXXX,
+      XXXXXXX,   _DIA , XXXXXXX,   _CEC , KC_BSLS, KC_TAB ,                        _EUR ,   KC_M ,   _CIE ,   _DIE ,   _OE  , XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           KC_LCTL, KC_LSFT, KC_LCMD,    QK_BOOT, XXXXXXX, XXXXXXX
                                       //`--------------------------'  `--------------------------'
@@ -263,6 +265,22 @@ void cedilla(bool pressed, uint8_t my_mods, int ostype) {
             break;
     }
 }
+void oe(bool pressed, uint8_t my_mods, int ostype) {
+    switch (ostype) {
+        case OS_MAC:
+            if (pressed) {
+                add_oneshot_mods(MOD_MASK_ALT);
+                tap_code(KC_Q);
+            }
+            break;
+        case OS_AND:
+            if (pressed) {
+                tap_code(KC_O);
+                tap_code(KC_E);
+            }
+            break;
+    }
+}
 void euro(bool pressed, uint8_t my_mods, int ostype) {
     switch (ostype) {
         case OS_MAC:
@@ -328,6 +346,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           break;
         case _DIU:
           accent_letter(_accent_diae, KC_U, record->event.pressed, my_mods, my_ostype);
+          break;
+        case _OE:
+          oe(record->event.pressed, my_mods, my_ostype);
           break;
         case _CEC:
           cedilla(record->event.pressed, my_mods, my_ostype);
