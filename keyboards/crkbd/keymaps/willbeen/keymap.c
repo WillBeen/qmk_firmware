@@ -74,7 +74,8 @@ enum my_keycodes {
     _WHDN,
     // os selection
     _MACOS,
-    _ANDRO
+    _ANDRO,
+    _DEADKEY // mandatory for password typing
 };
 
 enum layers {
@@ -149,7 +150,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_FCT] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      XXXXXXX, XXXXXXX, _ANDRO , _MACOS , XXXXXXX, KC_ESC ,                      XXXXXXX, KC_F9  , KC_F10 , KC_F11 , KC_F12 , XXXXXXX,
+      XXXXXXX,_DEADKEY, _ANDRO , _MACOS , XXXXXXX, KC_ESC ,                      XXXXXXX, KC_F9  , KC_F10 , KC_F11 , KC_F12 , XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       XXXXXXX, KC_LCTL, KC_LOPT, KC_LCMD, KC_LSFT, KC_ENT ,                      XXXXXXX, KC_F5  , KC_F6  , KC_F7  , KC_F8  , XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
@@ -164,7 +165,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 uint8_t my_mods;
 enum ostype {
     OS_MAC = SAFE_RANGE,
-    OS_AND
+    OS_AND,
+    OS_DEA
 };
 enum accents {
     _accent_aecu = SAFE_RANGE,
@@ -282,6 +284,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case _ANDRO:
             my_ostype = OS_AND;
             break;
+        case _DEADKEY:
+            my_ostype = OS_DEA;
+            break;
         case _ACE:
           accent_letter(_accent_aecu, KC_E, record->event.pressed, my_mods, my_ostype);
           break;
@@ -388,7 +393,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 unregister_mods(MOD_MASK_SHIFT);
                 tap_code(KC_QUOT);
                 set_mods(my_mods);
-                tap_code(KC_SPC);
+                if (my_ostype != OS_DEA) {
+                    tap_code(KC_SPC);
+                }
                 return false;
             } else {
                 return false;
@@ -399,7 +406,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
                 unregister_mods(MOD_MASK_SHIFT);
                 tap_code(KC_GRV);
                 set_mods(my_mods);
-                tap_code(KC_SPC);
+                if (my_ostype != OS_DEA) {
+                    tap_code(KC_SPC);
+                }
                 return false;
             } else {
                 return false;
@@ -429,7 +438,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 add_oneshot_mods(MOD_MASK_SHIFT);
                 tap_code(KC_6);
-                tap_code(KC_SPC);
+                if (my_ostype != OS_DEA) {
+                    tap_code(KC_SPC);
+                }
                 return false;
             } else {
                 return false;
@@ -439,7 +450,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 add_oneshot_mods(MOD_MASK_SHIFT);
                 tap_code(KC_GRV);
-                tap_code(KC_SPC);
+                if (my_ostype != OS_DEA) {
+                    tap_code(KC_SPC);
+                }
                 return false;
             } else {
                 return false;
@@ -449,7 +462,9 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             if (record->event.pressed) {
                 add_oneshot_mods(MOD_MASK_SHIFT);
                 tap_code(KC_QUOT);
-                tap_code(KC_SPC);
+                if (my_ostype != OS_DEA) {
+                    tap_code(KC_SPC);
+                }
                 return false;
             } else {
                 return false;
