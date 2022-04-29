@@ -37,6 +37,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // #define RETRO_TAPPING_PER_KEY
 #define IGNORE_MOD_TAP_INTERRUPT
 #define PERMISSIVE_HOLD
+#define TAPPING_TOGGLE 2
 
 // attempt to reduce firmware size
 // #define NO_ACTION_ONESHOT       // 518 bytes
