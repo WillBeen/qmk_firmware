@@ -105,9 +105,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   
   [_LNG] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      XXXXXXX,   _CIA , XXXXXXX, KC_UNDS,  TILDE , XXXXXXX,                        _DIU ,   _CIU ,   _GRU ,   _DII ,   _DIO , XXXXXXX,
+      XXXXXXX,   _CIA , XXXXXXX, KC_UNDS,  KC_TILD , XXXXXXX,                        _DIU ,   _CIU ,   _GRU ,   _DII ,   _DIO , XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      XXXXXXX,   _GRA , KC_LOPT, KC_MINS,  DQUOT , XXXXXXX,                        _TIN ,   _GRE ,   _ACE ,   _CII ,   _CIO , XXXXXXX,
+      XXXXXXX,   _GRA , KC_LOPT, KC_MINS,  KC_DQUO , XXXXXXX,                        _TIN ,   _GRE ,   _ACE ,   _CII ,   _CIO , XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       XXXXXXX,   _DIA , XXXXXXX,   _CEC , KC_GRV , XXXXXXX,                        _EUR ,   KC_M ,   _CIE ,   _DIE ,   _OE  , XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
@@ -117,7 +117,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_SYM] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      XXXXXXX, KC_EXLM,  KC_AT , KC_HASH, KC_DLR , KC_ESC ,                      KC_PERC, CIRC, KC_AMPR, KC_ASTR, KC_EQL , XXXXXXX,
+      XXXXXXX, KC_EXLM,  KC_AT , KC_HASH, KC_DLR , KC_ESC ,                      KC_PERC, KC_CIRC, KC_AMPR, KC_ASTR, KC_EQL , XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       XXXXXXX, KC_LCTL, KC_LOPT, KC_LCMD, KC_PIPE, KC_ENT ,                      KC_LPRN, KC_RPRN,  KC_UP , KC_LBRC, KC_RBRC, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
@@ -395,82 +395,32 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case KC_QUOT:
             if (record->event.pressed) {
                 unregister_mods(MOD_MASK_SHIFT);
-                tap_code(KC_QUOT);
+                register_code(KC_QUOT);
                 set_mods(my_mods);
-                if (my_ostype != OS_DEA) {
-                    tap_code(KC_SPC);
-                }
-                return false;
-            } else {
                 return false;
             }
           break;
         case KC_GRV:
             if (record->event.pressed) {    
                 unregister_mods(MOD_MASK_SHIFT);
-                tap_code(KC_GRV);
+                register_code(KC_GRV);
                 set_mods(my_mods);
-                if (my_ostype != OS_DEA) {
-                    tap_code(KC_SPC);
-                }
-                return false;
-            } else {
                 return false;
             }
           break;
         case KC_BSLS:
             if (record->event.pressed) {    
                 unregister_mods(MOD_MASK_SHIFT);
-                tap_code(KC_BSLS);
+                register_code(KC_BSLS);
                 set_mods(my_mods);
-                return false;
-            } else {
                 return false;
             }
           break;
         case KC_MINS:
             if (record->event.pressed) {    
                 unregister_mods(MOD_MASK_SHIFT);
-                tap_code(KC_MINS);
+                register_code(KC_MINS);
                 set_mods(my_mods);
-                return false;
-            } else {
-                return false;
-            }
-          break;
-        case CIRC:
-            if (record->event.pressed) {
-                add_oneshot_mods(MOD_MASK_SHIFT);
-                tap_code(KC_6);
-                if (my_ostype != OS_DEA) {
-                    tap_code(KC_SPC);
-                }
-                return false;
-            } else {
-                return false;
-            }
-          break;
-        case TILDE:
-            if (record->event.pressed) {
-                add_oneshot_mods(MOD_MASK_SHIFT);
-                tap_code(KC_GRV);
-                if (my_ostype != OS_DEA) {
-                    tap_code(KC_SPC);
-                }
-                return false;
-            } else {
-                return false;
-            }
-          break;
-        case DQUOT:
-            if (record->event.pressed) {
-                add_oneshot_mods(MOD_MASK_SHIFT);
-                tap_code(KC_QUOT);
-                if (my_ostype != OS_DEA) {
-                    tap_code(KC_SPC);
-                }
-                return false;
-            } else {
                 return false;
             }
           break;
