@@ -29,8 +29,6 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define _CMD_S  LCMD_T(KC_S)
 #define _CMD_E  LCMD_T(KC_E)
 #define _CMD_MNS  LCMD_T(KC_MINS)
-#define _LNG_SPC  LT(_LNG,KC_SPC)
-#define _NUM_TAB  LT(_NUM,KC_TAB)
 // combos
 #define _CTLnTAB  LCTL(KC_TAB)
 #define _CMDnTAB  LCMD(KC_TAB)
@@ -40,13 +38,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define _CMDnV  LCMD(KC_V)
 
 enum my_keycodes {
-    // dead keys
-    DQUOT = SAFE_RANGE,
-    CIRC,
-    TILDE,
-
     // accute accents
-    _ACE,
+    _ACE = SAFE_RANGE,
     // grave accents
     _GRA,
     _GRE,
@@ -76,9 +69,7 @@ enum my_keycodes {
     _WHDN,
     // os selection
     _MACOS,
-    _ANDRO,
-    _DEADKEY, // mandatory for password typing
-    test
+    _ANDRO
 };
 
 enum layers {
@@ -105,9 +96,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   
   [_LNG] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      XXXXXXX,   _CIA , XXXXXXX, KC_UNDS,  KC_TILD , XXXXXXX,                        _DIU ,   _CIU ,   _GRU ,   _DII ,   _DIO , XXXXXXX,
+      XXXXXXX,   _CIA , XXXXXXX, KC_UNDS, KC_TILD, XXXXXXX,                        _DIU ,   _CIU ,   _GRU ,   _DII ,   _DIO , XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      XXXXXXX,   _GRA , KC_LOPT, KC_MINS,  KC_DQUO , XXXXXXX,                        _TIN ,   _GRE ,   _ACE ,   _CII ,   _CIO , XXXXXXX,
+      XXXXXXX,   _GRA , KC_LOPT, KC_MINS, KC_DQUO, XXXXXXX,                        _TIN ,   _GRE ,   _ACE ,   _CII ,   _CIO , XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       XXXXXXX,   _DIA , XXXXXXX,   _CEC , KC_GRV , XXXXXXX,                        _EUR ,   KC_M ,   _CIE ,   _DIE ,   _OE  , XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
@@ -153,7 +144,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_FCT] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      XXXXXXX,_DEADKEY, XXXXXXX, _MACOS , XXXXXXX, KC_ESC ,                      XXXXXXX, KC_F9  , KC_F10 , KC_F11 , KC_F12 , XXXXXXX,
+      XXXXXXX, XXXXXXX, XXXXXXX, _MACOS , XXXXXXX, KC_ESC ,                      XXXXXXX, KC_F9  , KC_F10 , KC_F11 , KC_F12 , XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       XXXXXXX, KC_LCTL, KC_LOPT, KC_LCMD, KC_LSFT, KC_ENT ,                      XXXXXXX, KC_F5  , KC_F6  , KC_F7  , KC_F8  , XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
@@ -169,8 +160,7 @@ uint8_t my_mods;
 int my_accent;
 uint16_t my_keycode;
 enum ostype {
-    OS_MAC = SAFE_RANGE,
-    OS_DEA
+    OS_MAC = SAFE_RANGE
 };
 enum accents {
     _accent_aecu = SAFE_RANGE,
@@ -273,20 +263,8 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     my_mods = get_mods();
   
     switch (keycode) {
-        case test:
-            if (record->event.pressed) {
-                register_mods(MOD_MASK_SHIFT);
-                register_code(KC_A);
-                unregister_mods(MOD_MASK_SHIFT);
-            } else {
-                unregister_code(KC_A);
-            }
-            break;
         case _MACOS:
             my_ostype = OS_MAC;
-            break;
-        case _DEADKEY:
-            my_ostype = OS_DEA;
             break;
         case _ACE:
           accent_letter(_accent_aecu, KC_E, record->event.pressed, my_mods, my_ostype);
