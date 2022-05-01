@@ -153,7 +153,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_FCT] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      XXXXXXX,_DEADKEY, _ANDRO , _MACOS , XXXXXXX, KC_ESC ,                      XXXXXXX, KC_F9  , KC_F10 , KC_F11 , KC_F12 , XXXXXXX,
+      XXXXXXX,_DEADKEY, XXXXXXX, _MACOS , XXXXXXX, KC_ESC ,                      XXXXXXX, KC_F9  , KC_F10 , KC_F11 , KC_F12 , XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       XXXXXXX, KC_LCTL, KC_LOPT, KC_LCMD, KC_LSFT, KC_ENT ,                      XXXXXXX, KC_F5  , KC_F6  , KC_F7  , KC_F8  , XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
@@ -166,9 +166,10 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
 
 uint8_t my_mods;
+int my_accent;
+uint16_t my_keycode;
 enum ostype {
     OS_MAC = SAFE_RANGE,
-    OS_AND,
     OS_DEA
 };
 enum accents {
@@ -186,23 +187,15 @@ void accent_letter(int accent, uint16_t keycode, bool pressed, uint8_t my_mods, 
                 switch (ostype) {
                     case OS_MAC:
                         unregister_mods(MOD_MASK_SHIFT);
-                        tap_code(KC_QUOT);
-                        set_mods(my_mods);
-                        break;
-                    case OS_AND:
                         add_oneshot_mods(MOD_MASK_ALT);
                         tap_code(KC_E);
+                        set_mods(my_mods);
                         break;
                 }
                 break;
             case _accent_grav:
                 switch (ostype) {
                     case OS_MAC:
-                        unregister_mods(MOD_MASK_SHIFT);
-                        tap_code(KC_GRV);
-                        set_mods(my_mods);
-                        break;
-                    case OS_AND:
                         unregister_mods(MOD_MASK_SHIFT);
                         add_oneshot_mods(MOD_MASK_ALT);
                         tap_code(KC_GRV);
@@ -213,36 +206,31 @@ void accent_letter(int accent, uint16_t keycode, bool pressed, uint8_t my_mods, 
             case _accent_circ:
                 switch (ostype) {
                     case OS_MAC:
-                        add_oneshot_mods(MOD_MASK_SHIFT);
-                        tap_code(KC_6);
-                        break;
-                    case OS_AND:
+                        unregister_mods(MOD_MASK_SHIFT);
                         add_oneshot_mods(MOD_MASK_ALT);
                         tap_code(KC_I);
+                        set_mods(my_mods);
                         break;
                 }
                 break;
             case _accent_diae:
                 switch (ostype) {
                     case OS_MAC:
-                        add_oneshot_mods(MOD_MASK_SHIFT);
-                        tap_code(KC_QUOT);
-                        break;
-                    case OS_AND:
+                        unregister_mods(MOD_MASK_SHIFT);
                         add_oneshot_mods(MOD_MASK_ALT);
                         tap_code(KC_U);
+                        set_mods(my_mods);
                         break;
                 }
                 break;
             case _accent_tild:
                 switch (ostype) {
                     case OS_MAC:
-                        add_oneshot_mods(MOD_MASK_SHIFT);
-                        tap_code(KC_GRV);
-                        break;
-                    case OS_AND:
+                        unregister_mods(MOD_MASK_SHIFT);
                         add_oneshot_mods(MOD_MASK_ALT);
                         tap_code(KC_N);
+                        set_mods(my_mods);
+                        break;
                         break;
                 }
                 break;
@@ -251,19 +239,13 @@ void accent_letter(int accent, uint16_t keycode, bool pressed, uint8_t my_mods, 
     }
 }
 void cedilla(bool pressed, uint8_t my_mods, int ostype) {
-    switch (ostype) {
-        case OS_MAC:
-            if (pressed) {
+    if (pressed) {
+        switch (ostype) {
+            case OS_MAC:
                 add_oneshot_mods(MOD_MASK_ALT);
                 tap_code(KC_C);
-            }
-            break;
-        case OS_AND:
-            if (pressed) {
-                add_oneshot_mods(MOD_MASK_ALT);
-                tap_code(KC_C);
-            }
-            break;
+                break;
+        }
     }
 }
 void oe(bool pressed, uint8_t my_mods, int ostype) {
@@ -272,12 +254,6 @@ void oe(bool pressed, uint8_t my_mods, int ostype) {
             if (pressed) {
                 add_oneshot_mods(MOD_MASK_ALT);
                 tap_code(KC_Q);
-            }
-            break;
-        case OS_AND:
-            if (pressed) {
-                tap_code(KC_O);
-                tap_code(KC_E);
             }
             break;
     }
@@ -308,9 +284,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             break;
         case _MACOS:
             my_ostype = OS_MAC;
-            break;
-        case _ANDRO:
-            my_ostype = OS_AND;
             break;
         case _DEADKEY:
             my_ostype = OS_DEA;
