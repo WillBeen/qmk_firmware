@@ -68,8 +68,8 @@ enum my_keycodes {
     _WHUP,
     _WHDN,
     // os selection
-    _MACOS,
-    _ANDRO
+    _MAC_US,
+    _MAC_HEX
 };
 
 enum layers {
@@ -100,7 +100,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       XXXXXXX,   _GRA , KC_LOPT, KC_MINS, KC_DQUO, XXXXXXX,                        _TIN ,   _GRE ,   _ACE ,   _CII ,   _CIO , XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
-      XXXXXXX,   _DIA , XXXXXXX,   _CEC , KC_GRV , XXXXXXX,                        _EUR ,   KC_M ,   _CIE ,   _DIE ,   _OE  , XXXXXXX,
+      XXXXXXX,   _DIA , XXXXXXX,   _CEC , KC_GRV , XXXXXXX,                        _EUR ,   KC_M ,   _CIE ,   _DIE , XXXXXXX, XXXXXXX,
   //|--------+--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------+--------|
                                           KC_LCTL, KC_LSFT, KC_LCMD,    QK_BOOT, XXXXXXX, XXXXXXX
                                       //`--------------------------'  `--------------------------'
@@ -144,7 +144,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_FCT] = LAYOUT_split_3x6_3(
   //,-----------------------------------------------------.                    ,-----------------------------------------------------.
-      XXXXXXX, XXXXXXX, XXXXXXX, _MACOS , XXXXXXX, KC_ESC ,                      XXXXXXX, KC_F9  , KC_F10 , KC_F11 , KC_F12 , XXXXXXX,
+      XXXXXXX,_MAC_HEX, XXXXXXX, _MAC_US , XXXXXXX, KC_ESC ,                      XXXXXXX, KC_F9  , KC_F10 , KC_F11 , KC_F12 , XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
       XXXXXXX, KC_LCTL, KC_LOPT, KC_LCMD, KC_LSFT, KC_ENT ,                      XXXXXXX, KC_F5  , KC_F6  , KC_F7  , KC_F8  , XXXXXXX,
   //|--------+--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------+--------|
@@ -160,7 +160,8 @@ uint8_t my_mods;
 int my_accent;
 uint16_t my_keycode;
 enum ostype {
-    OS_MAC = SAFE_RANGE
+    MAC_US = SAFE_RANGE,
+    MAC_HEX
 };
 enum accents {
     _accent_aecu = SAFE_RANGE,
@@ -169,102 +170,398 @@ enum accents {
     _accent_diae,
     _accent_tild
 };
-int my_ostype = OS_MAC;
+int my_ostype = MAC_US;
 void accent_letter(int accent, uint16_t keycode, bool pressed, uint8_t my_mods, int ostype) {
     if (pressed) {
-        switch (accent) {
-            case _accent_aecu:
-                switch (ostype) {
-                    case OS_MAC:
+        switch (ostype) {
+            case MAC_US:
+                switch (accent) {
+                    case _accent_aecu:
                         unregister_mods(MOD_MASK_SHIFT);
                         add_oneshot_mods(MOD_MASK_ALT);
                         tap_code(KC_E);
                         set_mods(my_mods);
                         break;
-                }
-                break;
-            case _accent_grav:
-                switch (ostype) {
-                    case OS_MAC:
+                    case _accent_grav:
                         unregister_mods(MOD_MASK_SHIFT);
                         add_oneshot_mods(MOD_MASK_ALT);
                         tap_code(KC_GRV);
                         set_mods(my_mods);
                         break;
-                    }
-                break;
-            case _accent_circ:
-                switch (ostype) {
-                    case OS_MAC:
+                    case _accent_circ:
                         unregister_mods(MOD_MASK_SHIFT);
                         add_oneshot_mods(MOD_MASK_ALT);
                         tap_code(KC_I);
                         set_mods(my_mods);
                         break;
-                }
-                break;
-            case _accent_diae:
-                switch (ostype) {
-                    case OS_MAC:
+                    case _accent_diae:
                         unregister_mods(MOD_MASK_SHIFT);
                         add_oneshot_mods(MOD_MASK_ALT);
                         tap_code(KC_U);
                         set_mods(my_mods);
                         break;
-                }
-                break;
-            case _accent_tild:
-                switch (ostype) {
-                    case OS_MAC:
+                    case _accent_tild:
                         unregister_mods(MOD_MASK_SHIFT);
                         add_oneshot_mods(MOD_MASK_ALT);
                         tap_code(KC_N);
                         set_mods(my_mods);
                         break;
+                }
+                tap_code(keycode);
+                break;
+            case MAC_HEX:
+                switch (accent) {
+                    case _accent_aecu:
+                        if (get_mods() & MOD_MASK_SHIFT) {
+                            register_mods(MOD_MASK_ALT);
+                            tap_code(KC_0);
+                            tap_code(KC_0);
+                            tap_code(KC_C);
+                            tap_code(KC_9);
+                            unregister_mods(MOD_MASK_ALT);
+                        } else {
+                            register_mods(MOD_MASK_ALT);
+                            tap_code(KC_0);
+                            tap_code(KC_0);
+                            tap_code(KC_E);
+                            tap_code(KC_9);
+                            unregister_mods(MOD_MASK_ALT);
+                        }
+                    break;
+                    case _accent_grav:
+                        switch (keycode) {
+                            case KC_A:
+                                if (get_mods() & MOD_MASK_SHIFT) {
+                                    register_mods(MOD_MASK_ALT);
+                                    tap_code(KC_0);
+                                    tap_code(KC_0);
+                                    tap_code(KC_C);
+                                    tap_code(KC_0);
+                                    unregister_mods(MOD_MASK_ALT);
+                                } else {
+                                    register_mods(MOD_MASK_ALT);
+                                    tap_code(KC_0);
+                                    tap_code(KC_0);
+                                    tap_code(KC_E);
+                                    tap_code(KC_0);
+                                    unregister_mods(MOD_MASK_ALT);
+                                }
+                                break;
+                            case KC_E:
+                                if (get_mods() & MOD_MASK_SHIFT) {
+                                    register_mods(MOD_MASK_ALT);
+                                    tap_code(KC_0);
+                                    tap_code(KC_0);
+                                    tap_code(KC_C);
+                                    tap_code(KC_8);
+                                    unregister_mods(MOD_MASK_ALT);
+                                } else {
+                                    register_mods(MOD_MASK_ALT);
+                                    tap_code(KC_0);
+                                    tap_code(KC_0);
+                                    tap_code(KC_E);
+                                    tap_code(KC_8);
+                                    unregister_mods(MOD_MASK_ALT);
+                                }
+                                break;
+                            case KC_U:
+                                if (get_mods() & MOD_MASK_SHIFT) {
+                                    register_mods(MOD_MASK_ALT);
+                                    tap_code(KC_0);
+                                    tap_code(KC_0);
+                                    tap_code(KC_D);
+                                    tap_code(KC_9);
+                                    unregister_mods(MOD_MASK_ALT);
+                                } else {
+                                    register_mods(MOD_MASK_ALT);
+                                    tap_code(KC_0);
+                                    tap_code(KC_0);
+                                    tap_code(KC_F);
+                                    tap_code(KC_9);
+                                    unregister_mods(MOD_MASK_ALT);
+                                }
+                                break;
+                        }
+                        break;
+                    case _accent_circ:
+                        switch (keycode) {
+                            case KC_A:
+                                if (get_mods() & MOD_MASK_SHIFT) {
+                                    register_mods(MOD_MASK_ALT);
+                                    tap_code(KC_0);
+                                    tap_code(KC_0);
+                                    tap_code(KC_C);
+                                    tap_code(KC_2);
+                                    unregister_mods(MOD_MASK_ALT);
+                                } else {
+                                    register_mods(MOD_MASK_ALT);
+                                    tap_code(KC_0);
+                                    tap_code(KC_0);
+                                    tap_code(KC_E);
+                                    tap_code(KC_2);
+                                    unregister_mods(MOD_MASK_ALT);
+                                }
+                                break;
+                            case KC_E:
+                                if (get_mods() & MOD_MASK_SHIFT) {
+                                    register_mods(MOD_MASK_ALT);
+                                    tap_code(KC_0);
+                                    tap_code(KC_0);
+                                    tap_code(KC_C);
+                                    tap_code(KC_A);
+                                    unregister_mods(MOD_MASK_ALT);
+                                } else {
+                                    register_mods(MOD_MASK_ALT);
+                                    tap_code(KC_0);
+                                    tap_code(KC_0);
+                                    tap_code(KC_E);
+                                    tap_code(KC_A);
+                                    unregister_mods(MOD_MASK_ALT);
+                                }
+                                break;
+                            case KC_I:
+                                if (get_mods() & MOD_MASK_SHIFT) {
+                                    register_mods(MOD_MASK_ALT);
+                                    tap_code(KC_0);
+                                    tap_code(KC_0);
+                                    tap_code(KC_C);
+                                    tap_code(KC_E);
+                                    unregister_mods(MOD_MASK_ALT);
+                                } else {
+                                    register_mods(MOD_MASK_ALT);
+                                    tap_code(KC_0);
+                                    tap_code(KC_0);
+                                    tap_code(KC_E);
+                                    tap_code(KC_E);
+                                    unregister_mods(MOD_MASK_ALT);
+                                }
+                                break;
+                            case KC_O:
+                                if (get_mods() & MOD_MASK_SHIFT) {
+                                    register_mods(MOD_MASK_ALT);
+                                    tap_code(KC_0);
+                                    tap_code(KC_0);
+                                    tap_code(KC_D);
+                                    tap_code(KC_4);
+                                    unregister_mods(MOD_MASK_ALT);
+                                } else {
+                                    register_mods(MOD_MASK_ALT);
+                                    tap_code(KC_0);
+                                    tap_code(KC_0);
+                                    tap_code(KC_F);
+                                    tap_code(KC_4);
+                                    unregister_mods(MOD_MASK_ALT);
+                                }
+                                break;
+                            case KC_U:
+                                if (get_mods() & MOD_MASK_SHIFT) {
+                                    register_mods(MOD_MASK_ALT);
+                                    tap_code(KC_0);
+                                    tap_code(KC_0);
+                                    tap_code(KC_D);
+                                    tap_code(KC_B);
+                                    unregister_mods(MOD_MASK_ALT);
+                                } else {
+                                    register_mods(MOD_MASK_ALT);
+                                    tap_code(KC_0);
+                                    tap_code(KC_0);
+                                    tap_code(KC_F);
+                                    tap_code(KC_B);
+                                    unregister_mods(MOD_MASK_ALT);
+                                }
+                                break;
+                        }
+                        break;
+                    case _accent_diae:
+                        switch (keycode) {
+                            case KC_A:
+                                if (get_mods() & MOD_MASK_SHIFT) {
+                                    register_mods(MOD_MASK_ALT);
+                                    tap_code(KC_0);
+                                    tap_code(KC_0);
+                                    tap_code(KC_C);
+                                    tap_code(KC_4);
+                                    unregister_mods(MOD_MASK_ALT);
+                                } else {
+                                    register_mods(MOD_MASK_ALT);
+                                    tap_code(KC_0);
+                                    tap_code(KC_0);
+                                    tap_code(KC_E);
+                                    tap_code(KC_4);
+                                    unregister_mods(MOD_MASK_ALT);
+                                }
+                                break;
+                            case KC_E:
+                                if (get_mods() & MOD_MASK_SHIFT) {
+                                    register_mods(MOD_MASK_ALT);
+                                    tap_code(KC_0);
+                                    tap_code(KC_0);
+                                    tap_code(KC_C);
+                                    tap_code(KC_B);
+                                    unregister_mods(MOD_MASK_ALT);
+                                } else {
+                                    register_mods(MOD_MASK_ALT);
+                                    tap_code(KC_0);
+                                    tap_code(KC_0);
+                                    tap_code(KC_E);
+                                    tap_code(KC_B);
+                                    unregister_mods(MOD_MASK_ALT);
+                                }
+                                break;
+                            case KC_I:
+                                if (get_mods() & MOD_MASK_SHIFT) {
+                                    register_mods(MOD_MASK_ALT);
+                                    tap_code(KC_0);
+                                    tap_code(KC_0);
+                                    tap_code(KC_C);
+                                    tap_code(KC_F);
+                                    unregister_mods(MOD_MASK_ALT);
+                                } else {
+                                    register_mods(MOD_MASK_ALT);
+                                    tap_code(KC_0);
+                                    tap_code(KC_0);
+                                    tap_code(KC_E);
+                                    tap_code(KC_F);
+                                    unregister_mods(MOD_MASK_ALT);
+                                }
+                                break;
+                            case KC_O:
+                                if (get_mods() & MOD_MASK_SHIFT) {
+                                    register_mods(MOD_MASK_ALT);
+                                    tap_code(KC_0);
+                                    tap_code(KC_0);
+                                    tap_code(KC_D);
+                                    tap_code(KC_6);
+                                    unregister_mods(MOD_MASK_ALT);
+                                } else {
+                                    register_mods(MOD_MASK_ALT);
+                                    tap_code(KC_0);
+                                    tap_code(KC_0);
+                                    tap_code(KC_F);
+                                    tap_code(KC_6);
+                                    unregister_mods(MOD_MASK_ALT);
+                                }
+                                break;
+                            case KC_U:
+                                if (get_mods() & MOD_MASK_SHIFT) {
+                                    register_mods(MOD_MASK_ALT);
+                                    tap_code(KC_0);
+                                    tap_code(KC_0);
+                                    tap_code(KC_D);
+                                    tap_code(KC_C);
+                                    unregister_mods(MOD_MASK_ALT);
+                                } else {
+                                    register_mods(MOD_MASK_ALT);
+                                    tap_code(KC_0);
+                                    tap_code(KC_0);
+                                    tap_code(KC_F);
+                                    tap_code(KC_C);
+                                    unregister_mods(MOD_MASK_ALT);
+                                }
+                                break;
+                        }
+                        break;
+                    case _accent_tild:
+                        if (get_mods() & MOD_MASK_SHIFT) {
+                            register_mods(MOD_MASK_ALT);
+                            tap_code(KC_0);
+                            tap_code(KC_0);
+                            tap_code(KC_D);
+                            tap_code(KC_1);
+                            unregister_mods(MOD_MASK_ALT);
+                        } else {
+                            register_mods(MOD_MASK_ALT);
+                            tap_code(KC_0);
+                            tap_code(KC_0);
+                            tap_code(KC_F);
+                            tap_code(KC_1);
+                            unregister_mods(MOD_MASK_ALT);
+                        }
                         break;
                 }
                 break;
-        }
-        tap_code(keycode);
+            }
     }
 }
 void cedilla(bool pressed, uint8_t my_mods, int ostype) {
     if (pressed) {
         switch (ostype) {
-            case OS_MAC:
+            case MAC_US:
                 add_oneshot_mods(MOD_MASK_ALT);
                 tap_code(KC_C);
+                break;
+            case MAC_HEX:
+                if (get_mods() & MOD_MASK_SHIFT) {
+                    register_mods(MOD_MASK_ALT);
+                    tap_code(KC_0);
+                    tap_code(KC_0);
+                    tap_code(KC_C);
+                    tap_code(KC_7);
+                    unregister_mods(MOD_MASK_ALT);
+                } else {
+                    register_mods(MOD_MASK_ALT);
+                    tap_code(KC_0);
+                    tap_code(KC_0);
+                    tap_code(KC_E);
+                    tap_code(KC_7);
+                    unregister_mods(MOD_MASK_ALT);
+                }
                 break;
         }
     }
 }
-void oe(bool pressed, uint8_t my_mods, int ostype) {
-    switch (ostype) {
-        case OS_MAC:
-            if (pressed) {
-                add_oneshot_mods(MOD_MASK_ALT);
-                tap_code(KC_Q);
-            }
-            break;
-    }
-}
+// void oe(bool pressed, uint8_t my_mods, int ostype) {
+//     switch (ostype) {
+//         case MAC_US:
+//             if (pressed) {
+//                 add_oneshot_mods(MOD_MASK_ALT);
+//                 tap_code(KC_Q);
+//             }
+//             break;
+//     }
+// }
 void euro(bool pressed, uint8_t my_mods, int ostype) {
-    switch (ostype) {
-        case OS_MAC:
-            if (pressed) {
-                add_oneshot_mods(MOD_MASK_SHIFT);
-                add_oneshot_mods(MOD_MASK_ALT);
-                tap_code(KC_2);
-            }
-            break;
+    if (pressed) {
+        switch (ostype) {
+            case MAC_US:
+                if (get_mods() & MOD_MASK_SHIFT) {
+                    add_oneshot_mods(MOD_MASK_SHIFT);
+                    add_oneshot_mods(MOD_MASK_ALT);
+                    tap_code(KC_2);
+                } else {
+                    add_oneshot_mods(MOD_MASK_ALT);
+                    tap_code(KC_3);
+                }
+                break;
+            case MAC_HEX:
+                if (get_mods() & MOD_MASK_SHIFT) {
+                    register_mods(MOD_MASK_ALT);
+                    tap_code(KC_0);
+                    tap_code(KC_0);
+                    tap_code(KC_A);
+                    tap_code(KC_3);
+                    unregister_mods(MOD_MASK_ALT);
+                } else {
+                    register_mods(MOD_MASK_ALT);
+                    tap_code(KC_0);
+                    tap_code(KC_0);
+                    tap_code(KC_8);
+                    tap_code(KC_0);
+                    unregister_mods(MOD_MASK_ALT);
+                }
+                break;
+        }
     }
 }
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
     my_mods = get_mods();
   
     switch (keycode) {
-        case _MACOS:
-            my_ostype = OS_MAC;
+        case _MAC_US:
+            my_ostype = MAC_US;
+            break;
+        case _MAC_HEX:
+            my_ostype = MAC_HEX;
             break;
         case _ACE:
           accent_letter(_accent_aecu, KC_E, record->event.pressed, my_mods, my_ostype);
@@ -308,9 +605,6 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case _DIU:
           accent_letter(_accent_diae, KC_U, record->event.pressed, my_mods, my_ostype);
           break;
-        case _OE:
-          oe(record->event.pressed, my_mods, my_ostype);
-          break;
         case _CEC:
           cedilla(record->event.pressed, my_mods, my_ostype);
           break;
@@ -320,8 +614,11 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
         case _EUR:
           euro(record->event.pressed, my_mods, my_ostype);
           break;
+        // case _OE:
+        //   oe(record->event.pressed, my_mods, my_ostype);
+        //   break;
         case _WHUP:
-            if (my_ostype == OS_MAC) {
+            if (my_ostype == MAC_US) {
                 if (record->event.pressed) {
                     register_code(KC_WH_D);
                     return false;
@@ -340,7 +637,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
           break;
         case _WHDN:
-            if (my_ostype == OS_MAC) {
+            if (my_ostype == MAC_US) {
                 if (record->event.pressed) {
                     register_code(KC_WH_U);
                     return false;
