@@ -213,6 +213,7 @@ void accent_letter(int accent, uint16_t keycode, bool pressed, uint8_t my_mods, 
                 switch (accent) {
                     case _accent_aecu:
                         if (get_mods() & MOD_MASK_SHIFT) {
+                            unregister_mods(MOD_MASK_SHIFT);
                             register_mods(MOD_MASK_ALT);
                             tap_code(KC_0);
                             tap_code(KC_0);
@@ -232,6 +233,7 @@ void accent_letter(int accent, uint16_t keycode, bool pressed, uint8_t my_mods, 
                         switch (keycode) {
                             case KC_A:
                                 if (get_mods() & MOD_MASK_SHIFT) {
+                                    unregister_mods(MOD_MASK_SHIFT);
                                     register_mods(MOD_MASK_ALT);
                                     tap_code(KC_0);
                                     tap_code(KC_0);
@@ -249,6 +251,7 @@ void accent_letter(int accent, uint16_t keycode, bool pressed, uint8_t my_mods, 
                                 break;
                             case KC_E:
                                 if (get_mods() & MOD_MASK_SHIFT) {
+                                    unregister_mods(MOD_MASK_SHIFT);
                                     register_mods(MOD_MASK_ALT);
                                     tap_code(KC_0);
                                     tap_code(KC_0);
@@ -266,6 +269,7 @@ void accent_letter(int accent, uint16_t keycode, bool pressed, uint8_t my_mods, 
                                 break;
                             case KC_U:
                                 if (get_mods() & MOD_MASK_SHIFT) {
+                                    unregister_mods(MOD_MASK_SHIFT);
                                     register_mods(MOD_MASK_ALT);
                                     tap_code(KC_0);
                                     tap_code(KC_0);
@@ -287,6 +291,7 @@ void accent_letter(int accent, uint16_t keycode, bool pressed, uint8_t my_mods, 
                         switch (keycode) {
                             case KC_A:
                                 if (get_mods() & MOD_MASK_SHIFT) {
+                                    unregister_mods(MOD_MASK_SHIFT);
                                     register_mods(MOD_MASK_ALT);
                                     tap_code(KC_0);
                                     tap_code(KC_0);
@@ -304,6 +309,7 @@ void accent_letter(int accent, uint16_t keycode, bool pressed, uint8_t my_mods, 
                                 break;
                             case KC_E:
                                 if (get_mods() & MOD_MASK_SHIFT) {
+                                    unregister_mods(MOD_MASK_SHIFT);
                                     register_mods(MOD_MASK_ALT);
                                     tap_code(KC_0);
                                     tap_code(KC_0);
@@ -321,6 +327,7 @@ void accent_letter(int accent, uint16_t keycode, bool pressed, uint8_t my_mods, 
                                 break;
                             case KC_I:
                                 if (get_mods() & MOD_MASK_SHIFT) {
+                                    unregister_mods(MOD_MASK_SHIFT);
                                     register_mods(MOD_MASK_ALT);
                                     tap_code(KC_0);
                                     tap_code(KC_0);
@@ -338,6 +345,7 @@ void accent_letter(int accent, uint16_t keycode, bool pressed, uint8_t my_mods, 
                                 break;
                             case KC_O:
                                 if (get_mods() & MOD_MASK_SHIFT) {
+                                    unregister_mods(MOD_MASK_SHIFT);
                                     register_mods(MOD_MASK_ALT);
                                     tap_code(KC_0);
                                     tap_code(KC_0);
@@ -355,6 +363,7 @@ void accent_letter(int accent, uint16_t keycode, bool pressed, uint8_t my_mods, 
                                 break;
                             case KC_U:
                                 if (get_mods() & MOD_MASK_SHIFT) {
+                                    unregister_mods(MOD_MASK_SHIFT);
                                     register_mods(MOD_MASK_ALT);
                                     tap_code(KC_0);
                                     tap_code(KC_0);
@@ -376,6 +385,7 @@ void accent_letter(int accent, uint16_t keycode, bool pressed, uint8_t my_mods, 
                         switch (keycode) {
                             case KC_A:
                                 if (get_mods() & MOD_MASK_SHIFT) {
+                                    unregister_mods(MOD_MASK_SHIFT);
                                     register_mods(MOD_MASK_ALT);
                                     tap_code(KC_0);
                                     tap_code(KC_0);
@@ -393,6 +403,7 @@ void accent_letter(int accent, uint16_t keycode, bool pressed, uint8_t my_mods, 
                                 break;
                             case KC_E:
                                 if (get_mods() & MOD_MASK_SHIFT) {
+                                    unregister_mods(MOD_MASK_SHIFT);
                                     register_mods(MOD_MASK_ALT);
                                     tap_code(KC_0);
                                     tap_code(KC_0);
@@ -410,6 +421,7 @@ void accent_letter(int accent, uint16_t keycode, bool pressed, uint8_t my_mods, 
                                 break;
                             case KC_I:
                                 if (get_mods() & MOD_MASK_SHIFT) {
+                                    unregister_mods(MOD_MASK_SHIFT);
                                     register_mods(MOD_MASK_ALT);
                                     tap_code(KC_0);
                                     tap_code(KC_0);
@@ -427,6 +439,7 @@ void accent_letter(int accent, uint16_t keycode, bool pressed, uint8_t my_mods, 
                                 break;
                             case KC_O:
                                 if (get_mods() & MOD_MASK_SHIFT) {
+                                    unregister_mods(MOD_MASK_SHIFT);
                                     register_mods(MOD_MASK_ALT);
                                     tap_code(KC_0);
                                     tap_code(KC_0);
@@ -444,6 +457,7 @@ void accent_letter(int accent, uint16_t keycode, bool pressed, uint8_t my_mods, 
                                 break;
                             case KC_U:
                                 if (get_mods() & MOD_MASK_SHIFT) {
+                                    unregister_mods(MOD_MASK_SHIFT);
                                     register_mods(MOD_MASK_ALT);
                                     tap_code(KC_0);
                                     tap_code(KC_0);
@@ -463,6 +477,7 @@ void accent_letter(int accent, uint16_t keycode, bool pressed, uint8_t my_mods, 
                         break;
                     case _accent_tild:
                         if (get_mods() & MOD_MASK_SHIFT) {
+                            unregister_mods(MOD_MASK_SHIFT);
                             register_mods(MOD_MASK_ALT);
                             tap_code(KC_0);
                             tap_code(KC_0);
@@ -479,6 +494,7 @@ void accent_letter(int accent, uint16_t keycode, bool pressed, uint8_t my_mods, 
                         }
                         break;
                 }
+                set_mods(my_mods);
                 break;
             }
     }
@@ -492,6 +508,7 @@ void cedilla(bool pressed, uint8_t my_mods, int ostype) {
                 break;
             case MAC_HEX:
                 if (get_mods() & MOD_MASK_SHIFT) {
+                    unregister_mods(MOD_MASK_SHIFT);
                     register_mods(MOD_MASK_ALT);
                     tap_code(KC_0);
                     tap_code(KC_0);
@@ -506,6 +523,7 @@ void cedilla(bool pressed, uint8_t my_mods, int ostype) {
                     tap_code(KC_7);
                     unregister_mods(MOD_MASK_ALT);
                 }
+                set_mods(my_mods);
                 break;
         }
     }
@@ -525,16 +543,17 @@ void euro(bool pressed, uint8_t my_mods, int ostype) {
         switch (ostype) {
             case MAC_US:
                 if (get_mods() & MOD_MASK_SHIFT) {
+                    add_oneshot_mods(MOD_MASK_ALT);
+                    tap_code(KC_3);
+                } else {
                     add_oneshot_mods(MOD_MASK_SHIFT);
                     add_oneshot_mods(MOD_MASK_ALT);
                     tap_code(KC_2);
-                } else {
-                    add_oneshot_mods(MOD_MASK_ALT);
-                    tap_code(KC_3);
                 }
                 break;
             case MAC_HEX:
                 if (get_mods() & MOD_MASK_SHIFT) {
+                    unregister_mods(MOD_MASK_SHIFT);
                     register_mods(MOD_MASK_ALT);
                     tap_code(KC_0);
                     tap_code(KC_0);
@@ -549,6 +568,7 @@ void euro(bool pressed, uint8_t my_mods, int ostype) {
                     tap_code(KC_0);
                     unregister_mods(MOD_MASK_ALT);
                 }
+                set_mods(my_mods);
                 break;
         }
     }
