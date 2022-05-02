@@ -543,6 +543,7 @@ void euro(bool pressed, uint8_t my_mods, int ostype) {
         switch (ostype) {
             case MAC_US:
                 if (get_mods() & MOD_MASK_SHIFT) {
+                    unregister_mods(MOD_MASK_SHIFT);
                     add_oneshot_mods(MOD_MASK_ALT);
                     tap_code(KC_3);
                 } else {
@@ -568,9 +569,9 @@ void euro(bool pressed, uint8_t my_mods, int ostype) {
                     tap_code(KC_0);
                     unregister_mods(MOD_MASK_ALT);
                 }
-                set_mods(my_mods);
                 break;
         }
+        set_mods(my_mods);
     }
 }
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
