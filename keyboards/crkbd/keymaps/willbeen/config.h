@@ -31,13 +31,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // #define MASTER_RIGHT
 // #define EE_HANDS
 
-//#define TAPPING_FORCE_HOLD
 #define TAPPING_TERM 500
-// #define TAPPING_TERM_PER_KEY
-// #define RETRO_TAPPING_PER_KEY
 #define IGNORE_MOD_TAP_INTERRUPT
 #define PERMISSIVE_HOLD
-#define TAPPING_TOGGLE 2
-
-// attempt to reduce firmware size
-// #define NO_ACTION_ONESHOT       // 518 bytes
+#define TAPPING_TOGGLE 3
