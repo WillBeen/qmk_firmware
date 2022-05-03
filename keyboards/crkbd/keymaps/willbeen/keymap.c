@@ -159,7 +159,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 uint8_t my_mods;
 int my_accent;
 uint16_t my_keycode;
-enum ostype {
+enum layout {
     MAC_US = SAFE_RANGE,
     MAC_HEX
 };
@@ -170,10 +170,10 @@ enum accents {
     _accent_diae,
     _accent_tild
 };
-int my_ostype = MAC_US;
-void accent_letter(int accent, uint16_t keycode, bool pressed, uint8_t my_mods, int ostype) {
+int my_layout = MAC_HEX;
+void accent_letter(int accent, uint16_t keycode, bool pressed, uint8_t my_mods, int layout) {
     if (pressed) {
-        switch (ostype) {
+        switch (layout) {
             case MAC_US:
                 switch (accent) {
                     case _accent_aecu:
@@ -499,9 +499,9 @@ void accent_letter(int accent, uint16_t keycode, bool pressed, uint8_t my_mods, 
             }
     }
 }
-void cedilla(bool pressed, uint8_t my_mods, int ostype) {
+void cedilla(bool pressed, uint8_t my_mods, int layout) {
     if (pressed) {
-        switch (ostype) {
+        switch (layout) {
             case MAC_US:
                 add_oneshot_mods(MOD_MASK_ALT);
                 tap_code(KC_C);
@@ -528,8 +528,8 @@ void cedilla(bool pressed, uint8_t my_mods, int ostype) {
         }
     }
 }
-// void oe(bool pressed, uint8_t my_mods, int ostype) {
-//     switch (ostype) {
+// void oe(bool pressed, uint8_t my_mods, int layout) {
+//     switch (layout) {
 //         case MAC_US:
 //             if (pressed) {
 //                 add_oneshot_mods(MOD_MASK_ALT);
@@ -538,9 +538,9 @@ void cedilla(bool pressed, uint8_t my_mods, int ostype) {
 //             break;
 //     }
 // }
-void euro(bool pressed, uint8_t my_mods, int ostype) {
+void euro(bool pressed, uint8_t my_mods, int layout) {
     if (pressed) {
-        switch (ostype) {
+        switch (layout) {
             case MAC_US:
                 if (get_mods() & MOD_MASK_SHIFT) {
                     unregister_mods(MOD_MASK_SHIFT);
@@ -579,67 +579,67 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
   
     switch (keycode) {
         case _MAC_US:
-            my_ostype = MAC_US;
+            my_layout = MAC_US;
             break;
         case _MAC_HEX:
-            my_ostype = MAC_HEX;
+            my_layout = MAC_HEX;
             break;
         case _ACE:
-          accent_letter(_accent_aecu, KC_E, record->event.pressed, my_mods, my_ostype);
+          accent_letter(_accent_aecu, KC_E, record->event.pressed, my_mods, my_layout);
           break;
         case _GRA:
-          accent_letter(_accent_grav, KC_A, record->event.pressed, my_mods, my_ostype);
+          accent_letter(_accent_grav, KC_A, record->event.pressed, my_mods, my_layout);
           break;
         case _GRE:
-          accent_letter(_accent_grav, KC_E, record->event.pressed, my_mods, my_ostype);
+          accent_letter(_accent_grav, KC_E, record->event.pressed, my_mods, my_layout);
           break;
         case _GRU:
-          accent_letter(_accent_grav, KC_U, record->event.pressed, my_mods, my_ostype);
+          accent_letter(_accent_grav, KC_U, record->event.pressed, my_mods, my_layout);
           break;
         case _CIA:
-          accent_letter(_accent_circ, KC_A, record->event.pressed, my_mods, my_ostype);
+          accent_letter(_accent_circ, KC_A, record->event.pressed, my_mods, my_layout);
           break;
         case _CIE:
-          accent_letter(_accent_circ, KC_E, record->event.pressed, my_mods, my_ostype);
+          accent_letter(_accent_circ, KC_E, record->event.pressed, my_mods, my_layout);
           break;
         case _CII:
-          accent_letter(_accent_circ, KC_I, record->event.pressed, my_mods, my_ostype);
+          accent_letter(_accent_circ, KC_I, record->event.pressed, my_mods, my_layout);
           break;
         case _CIO:
-          accent_letter(_accent_circ, KC_O, record->event.pressed, my_mods, my_ostype);
+          accent_letter(_accent_circ, KC_O, record->event.pressed, my_mods, my_layout);
           break;
         case _CIU:
-          accent_letter(_accent_circ, KC_U, record->event.pressed, my_mods, my_ostype);
+          accent_letter(_accent_circ, KC_U, record->event.pressed, my_mods, my_layout);
           break;
         case _DIA:
-          accent_letter(_accent_diae, KC_A, record->event.pressed, my_mods, my_ostype);
+          accent_letter(_accent_diae, KC_A, record->event.pressed, my_mods, my_layout);
           break;
         case _DIE:
-          accent_letter(_accent_diae, KC_E, record->event.pressed, my_mods, my_ostype);
+          accent_letter(_accent_diae, KC_E, record->event.pressed, my_mods, my_layout);
           break;
         case _DII:
-          accent_letter(_accent_diae, KC_I, record->event.pressed, my_mods, my_ostype);
+          accent_letter(_accent_diae, KC_I, record->event.pressed, my_mods, my_layout);
           break;
         case _DIO:
-          accent_letter(_accent_diae, KC_O, record->event.pressed, my_mods, my_ostype);
+          accent_letter(_accent_diae, KC_O, record->event.pressed, my_mods, my_layout);
           break;
         case _DIU:
-          accent_letter(_accent_diae, KC_U, record->event.pressed, my_mods, my_ostype);
+          accent_letter(_accent_diae, KC_U, record->event.pressed, my_mods, my_layout);
           break;
         case _CEC:
-          cedilla(record->event.pressed, my_mods, my_ostype);
+          cedilla(record->event.pressed, my_mods, my_layout);
           break;
         case _TIN:
-          accent_letter(_accent_tild, KC_N, record->event.pressed, my_mods, my_ostype);
+          accent_letter(_accent_tild, KC_N, record->event.pressed, my_mods, my_layout);
           break;
         case _EUR:
-          euro(record->event.pressed, my_mods, my_ostype);
+          euro(record->event.pressed, my_mods, my_layout);
           break;
         // case _OE:
-        //   oe(record->event.pressed, my_mods, my_ostype);
+        //   oe(record->event.pressed, my_mods, my_layout);
         //   break;
         case _WHUP:
-            if (my_ostype == MAC_US) {
+            if (my_layout == MAC_US) {
                 if (record->event.pressed) {
                     register_code(KC_WH_D);
                     return false;
@@ -658,7 +658,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
             }
           break;
         case _WHDN:
-            if (my_ostype == MAC_US) {
+            if (my_layout == MAC_US) {
                 if (record->event.pressed) {
                     register_code(KC_WH_U);
                     return false;
