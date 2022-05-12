@@ -76,3 +76,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 //#define NO_ACTION_LAYER
 //#define NO_ACTION_TAPPING
 //#define NO_ACTION_ONESHOT
+
+// max 8 layers
+#define LAYER_STATE_8BIT
+
+//#define USE_MATRIX_I2C
+
+/* Select hand configuration */
+// #define MASTER_LEFT
+// #define MASTER_RIGHT
+// #define EE_HANDS
+
+//#define TAPPING_FORCE_HOLD
+#define TAPPING_TERM 200
+// #define TAPPING_TERM_PER_KEY
+// #define RETRO_TAPPING_PER_KEY
+#define IGNORE_MOD_TAP_INTERRUPT
+
+// attempt to reduce firmware size
+#define NO_ACTION_ONESHOT       // 518 bytes
