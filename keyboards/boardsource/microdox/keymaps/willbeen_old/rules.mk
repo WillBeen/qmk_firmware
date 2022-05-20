@@ -5,7 +5,6 @@ MOUSEKEY_ENABLE   = yes
 LTO_ENABLE             = yes
 
 # special chars management
-UNICODEMAP_ENABLE = yes
+# UNICODEMAP_ENABLE = yes
 
-
-
+BOOTMAGIC_ENABLE = no
