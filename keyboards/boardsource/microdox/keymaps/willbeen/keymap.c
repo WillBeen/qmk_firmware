@@ -1,6 +1,5 @@
 /*
-Copyright 2019 @foostan
-Copyright 2020 Drashna Jaelre <@drashna>
+Copyright 2020 Cole Smith <cole@boadsource.xyz>
 
 This program is free software: you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
@@ -31,8 +30,10 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 #define _CMD_MNS  LCMD_T(KC_MINS)
 // combos
 #define _CTLnTAB  LCTL(KC_TAB)
+#define _CTLnGRV  LCTL(KC_GRV)
 #define _CMDnTAB  LCMD(KC_TAB)
 #define _CMDnT  LCMD(KC_T)
+#define _CMDnR  LCMD(KC_R)
 #define _CMDnX  LCMD(KC_X)
 #define _CMDnC  LCMD(KC_C)
 #define _CMDnV  LCMD(KC_V)
@@ -78,10 +79,8 @@ enum layers {
   _LNG
 };
 
-
-
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
-[_BSE] = LAYOUT_split_3x5_3(
+  [_BSE] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
         KC_Q ,   KC_W ,   KC_F ,   KC_P ,   KC_B ,                        KC_J ,   KC_L ,   KC_U ,   KC_Y , KC_SCLN,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
@@ -89,8 +88,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
         KC_Z ,   KC_X ,   KC_C ,   KC_D ,   KC_V ,                        KC_K ,   KC_M , KC_COMM,  KC_DOT, KC_SLSH,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                         TT(_NUM), KC_LSFT, KC_QUOT,   TT(_SYM), KC_SPC , MO(_LNG)
-                                      //`--------------------------'  `--------------------------'
+                                TT(_NUM), KC_LSFT, KC_QUOT,   MO(_LNG), KC_SPC ,TT(_SYM) 
+                             //`--------------------------'  `--------------------------'
   ),
   
   [_LNG] = LAYOUT_split_3x5_3(
@@ -101,8 +100,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
         _DIA , XXXXXXX,   _CEC , KC_GRV , XXXXXXX,                        _EUR ,   KC_M ,   _CIE ,   _DIE ,   _OE  ,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                          KC_LCTL, KC_LSFT, KC_LCMD,    QK_BOOT, XXXXXXX, XXXXXXX
-                                      //`--------------------------'  `--------------------------'
+                                 KC_LCTL, KC_LSFT, KC_LCMD,    XXXXXXX, XXXXXXX, XXXXXXX
+                             //`--------------------------'  `--------------------------'
   ),
 
   [_SYM] = LAYOUT_split_3x5_3(
@@ -111,22 +110,22 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_LCTL, KC_LOPT, KC_LCMD, KC_PIPE, KC_ENT ,                      KC_LPRN, KC_RPRN,  KC_UP , KC_LBRC, KC_RBRC,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      KC_CUT , KC_COPY, KC_PSTE, KC_BSLS, KC_TAB ,                       KC_LT , KC_LEFT, KC_DOWN, KC_RGHT,  KC_GT ,
+     _CTLnGRV, XXXXXXX, XXXXXXX, KC_BSLS, KC_TAB ,                       KC_LT , KC_LEFT, KC_DOWN, KC_RGHT,  KC_GT ,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                          KC_DEL , KC_LSFT, KC_BSPC,    XXXXXXX, MO(_FCT),TO(_BSE)
-                                      //`--------------------------'  `--------------------------'
+                                 KC_DEL , KC_LSFT, KC_BSPC,   TO(_BSE),MO(_FCT), XXXXXXX
+                             //`--------------------------'  `--------------------------'
   ),
 
   [_NUM] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-     TO(_BSE),_CTLnTAB,_CMDnTAB, _CMDnT , KC_ESC ,                      KC_PPLS,  KC_7  ,  KC_8  ,  KC_9  , KC_PEQL,
+      _CMDnR ,_CTLnTAB,_CMDnTAB, _CMDnT , KC_ESC ,                      KC_PPLS,  KC_7  ,  KC_8  ,  KC_9  , KC_PEQL,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_LCTL, KC_LOPT, KC_LCMD, KC_BTN1, KC_ENT ,                      KC_PMNS,  KC_4  ,  KC_5  ,  KC_6  , KC_PDOT,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       _CMDnX , _CMDnC , _CMDnV , KC_BTN2, KC_TAB ,                      KC_PAST,  KC_1  ,  KC_2  ,  KC_3  , KC_PSLS,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                         MO(_MSE), KC_LSFT, KC_BSPC,    KC_SPC ,  KC_0  ,TO(_BSE)
-                                      //`--------------------------'  `--------------------------'
+                               MO(_MSE), KC_LSFT, KC_BSPC,    TO(_BSE),  KC_0  , KC_SPC
+                            //`--------------------------'  `--------------------------'
   ),
 
   [_MSE] = LAYOUT_split_3x5_3(
@@ -137,8 +136,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|-------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
      XXXXXXX, XXXXXXX, XXXXXXX, KC_BTN2, KC_TAB ,                      XXXXXXX, KC_MS_L, KC_MS_D, KC_MS_R, XXXXXXX,
   //|-------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                          XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, KC_LSFT, XXXXXXX
-                                      //`--------------------------'  `--------------------------'
+                                XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, KC_LSFT, XXXXXXX
+                            //`--------------------------'  `--------------------------'
   ),
 
   [_FCT] = LAYOUT_split_3x5_3(
@@ -149,8 +148,8 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       XXXXXXX, XXXXXXX, XXXXXXX, XXXXXXX, KC_TAB ,                      XXXXXXX, KC_F1  , KC_F2  , KC_F3  , KC_F4  ,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
-                                          XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX
-                                      //`--------------------------'  `--------------------------'
+                                 XXXXXXX, XXXXXXX, XXXXXXX,    XXXXXXX, XXXXXXX, XXXXXXX
+                             //`--------------------------'  `--------------------------'
   ),
 };
 
