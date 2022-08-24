@@ -168,7 +168,7 @@ enum accents {
     _accent_diae,
     _accent_tild
 };
-int my_layout = MAC_HEX;
+int my_layout = MAC_US;
 
 void accent_letter(int accent, uint16_t keycode, bool pressed, uint8_t my_mods, int layout) {
     if (pressed) {
