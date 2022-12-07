@@ -1,5 +1,5 @@
 // max 8 layers
-#define LAYER_STATE_8BIT
+#define LAYER_STATE_UBIT
 
 #define TAPPING_TERM 250
 #define TAPPING_TOGGLE 3
