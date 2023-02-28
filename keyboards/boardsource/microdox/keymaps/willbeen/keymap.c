@@ -21,7 +21,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 // hold/press keys
 #define _CTL_A  LCTL_T(KC_A)
 #define _CTL_GRA  LCTL_T(_GRA)
-#define _CTL_O  LCTL_T(KC_O)
+#define _CTL_U  LCTL_T(KC_U)
 #define _OPT_R  LOPT_T(KC_R)
 #define _OPT_I  LOPT_T(KC_I)
 #define _OPT_UDS  LOPT_T(KC_UNDS)
@@ -64,10 +64,7 @@ enum my_keycodes {
     //tilde
     _TIN,
     // euro
-    _EUR,
-    // os selection
-    _MAC_US,
-    _MAC_HEX
+    _EUR
 };
 
 enum layers {
@@ -84,9 +81,9 @@ enum layers {
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   [_MOD] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-        KC_Q ,   KC_W ,   KC_F ,   KC_P ,   KC_B ,                        KC_J ,   KC_L ,   KC_U ,   KC_Y , KC_SCLN,
+        KC_Q ,   KC_W ,   KC_F ,   KC_P ,   KC_B ,                        KC_J ,   KC_L ,   KC_O ,   KC_Y , KC_SCLN,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      _CTL_A , _OPT_R , _CMD_S ,   KC_T ,   KC_G ,                        KC_H ,   KC_N , _CMD_E , _OPT_I , _CTL_O ,
+      _CTL_A , _OPT_R , _CMD_S ,   KC_T ,   KC_G ,                        KC_H ,   KC_N , _CMD_E , _OPT_I , _CTL_U ,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
         KC_Z ,   KC_X ,   KC_C ,   KC_D ,   KC_V ,                        KC_K ,   KC_M , KC_COMM,  KC_DOT, KC_SLSH,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
@@ -95,9 +92,9 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   ),
   [_STD] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-        KC_Q ,   KC_W ,   KC_F ,   KC_P ,   KC_B ,                        KC_J ,   KC_L ,   KC_U ,   KC_Y , KC_SCLN,
+        KC_Q ,   KC_W ,   KC_F ,   KC_P ,   KC_B ,                        KC_J ,   KC_L ,   KC_O ,   KC_Y , KC_SCLN,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      KC_A , KC_R , KC_S ,   KC_T ,   KC_G ,                        KC_H ,   KC_N , KC_E , KC_I , KC_O ,
+      KC_A , KC_R , KC_S ,   KC_T ,   KC_G ,                        KC_H ,   KC_N , KC_E , KC_I , KC_U ,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
         KC_Z ,   KC_X ,   KC_C ,   KC_D ,   KC_V ,                        KC_K ,   KC_M , KC_COMM,  KC_DOT, KC_SLSH,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
@@ -166,7 +163,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_FCT] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-     DF(_STD),DF(_MOD),_MAC_US , XXXXXXX, KC_ESC ,                      XXXXXXX, KC_F9  , KC_F10 , KC_F11 , KC_F12 ,
+     DF(_STD),DF(_MOD),CG_SWAP , XXXXXXX, KC_ESC ,                      XXXXXXX, KC_F9  , KC_F10 , KC_F11 , KC_F12 ,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_LCTL, KC_LOPT, KC_LCMD, KC_LSFT, KC_ENT ,                      XXXXXXX, KC_F5  , KC_F6  , KC_F7  , KC_F8  ,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
