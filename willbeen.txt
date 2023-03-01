@@ -1,0 +1,21 @@
+### a retenir
+### pour avoir les dernières updates de QMK :
+
+# make git-submodule
+
+### pour compiler QMK sur blok (RP2040), ajouter ça au rules.mk : CONVERT_TO = blok
+### compilation QMK
+
+export qmkpath="${HOME}/Documents/gitrepos/perso/qmk_firmware"
+
+### pour monter le microdox en rw
+: "
+umount  /dev/disk2s1
+mkdir /Volumes/disk2s1
+mount -t msdos -o rw,auto,nobrowse /dev/disk2s1 /Volumes/disk2s1
+cp /Users/david.delgado/Documents/gitrepos/perso/qmk_firmware/boardsource_microdox_v2_willbeen_blok.uf2 /Volumes/disk2s1/
+"
+
+# qmk setup -H ${qmkpath}
+# alias qmkcomp='qmk compile -kb crkbd -km willbeen'
+alias qmkcomp='qmk compile -kb boardsource/microdox/v2 -km willbeen'
