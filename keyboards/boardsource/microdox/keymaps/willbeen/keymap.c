@@ -94,7 +94,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
   //,--------------------------------------------.                    ,--------------------------------------------.
         KC_Q ,   KC_W ,   KC_F ,   KC_P ,   KC_B ,                        KC_J ,   KC_L ,   KC_O ,   KC_Y , KC_SCLN,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-      KC_A , KC_R , KC_S ,   KC_T ,   KC_G ,                        KC_H ,   KC_N , KC_E , KC_I , KC_U ,
+        KC_A ,   KC_R ,   KC_S ,   KC_T ,   KC_G ,                        KC_H ,   KC_N ,   KC_E ,   KC_I ,  KC_U  ,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
         KC_Z ,   KC_X ,   KC_C ,   KC_D ,   KC_V ,                        KC_K ,   KC_M , KC_COMM,  KC_DOT, KC_SLSH,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
@@ -115,11 +115,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_LNG] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-        _CIA , XXXXXXX, KC_UNDS, KC_TILD, XXXXXXX,                        _DIU ,   _CIU ,   _GRU ,   _DII ,   _DIO ,
+        _CIA , XXXXXXX, KC_UNDS, KC_TILD, XXXXXXX,                        _OE  ,   _DIO ,   _CIO ,   _DII ,   _CIU ,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-        _GRA , KC_LOPT, KC_MINS, KC_DQUO, XXXXXXX,                        _TIN ,   _GRE ,   _ACE ,   _CII ,   _CIO ,
+        _GRA , KC_LOPT, KC_MINS, KC_DQUO, XXXXXXX,                        _TIN ,   _GRE ,   _ACE ,   _CII ,   _GRU ,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-        _DIA , XXXXXXX,   _CEC , KC_GRV , XXXXXXX,                        _EUR ,   KC_M ,   _CIE ,   _DIE ,   _OE  ,
+        _DIA , XXXXXXX,   _CEC , KC_GRV , XXXXXXX,                        _EUR ,   KC_M ,   _CIE ,   _DIE ,   _DIU ,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
                                  KC_LCTL, KC_LSFT, KC_LCMD,    XXXXXXX, XXXXXXX, XXXXXXX
                              //`--------------------------'  `--------------------------'
@@ -163,7 +163,7 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_FCT] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-     DF(_STD),DF(_MOD),CG_SWAP , XXXXXXX, KC_ESC ,                      XXXXXXX, KC_F9  , KC_F10 , KC_F11 , KC_F12 ,
+     DF(_STD),DF(_MOD),CG_SWAP , CG_NORM, KC_ESC ,                      XXXXXXX, KC_F9  , KC_F10 , KC_F11 , KC_F12 ,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
       KC_LCTL, KC_LOPT, KC_LCMD, KC_LSFT, KC_ENT ,                      XXXXXXX, KC_F5  , KC_F6  , KC_F7  , KC_F8  ,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
