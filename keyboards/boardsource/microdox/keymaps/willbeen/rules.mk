@@ -10,3 +10,5 @@ GRAVE_ESC_ENABLE = no
 MAGIC_ENABLE = no
 AVR_USE_MINIMAL_PRINTF = yes
 MUSIC_ENABLE = no
+
+SRC += features/achordion.c
