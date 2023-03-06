@@ -17,6 +17,7 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include QMK_KEYBOARD_H
 #include <stdio.h>
+#include "features/achordion.h"
 
 // hold/press keys
 #define _CTL_A  LCTL_T(KC_A)
@@ -258,6 +259,7 @@ void euro(bool pressed, uint8_t my_mods, int layout) {
     }
 }
 bool process_record_user(uint16_t keycode, keyrecord_t *record) {
+    if (!process_achordion(keycode, record)) { return false; }
     my_mods = get_mods();
 
     switch (keycode) {
@@ -361,4 +363,12 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
           break;
     }
     return true;
+}
+
+uint16_t achordion_timeout(uint16_t tap_hold_keycode) {
+  return 300;
+}
+
+void matrix_scan_user(void) {
+  achordion_task();
 }
