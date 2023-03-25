@@ -116,11 +116,11 @@ const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
   [_LNG] = LAYOUT_split_3x5_3(
   //,--------------------------------------------.                    ,--------------------------------------------.
-        _CIA , XXXXXXX, KC_UNDS, KC_TILD, XXXXXXX,                        _OE  ,   _DIO ,   _CIO ,   _DII ,   _CIU ,
+        _CIA , XXXXXXX, KC_UNDS, KC_TILD, XXXXXXX,                        _OE  ,   _DIO ,   _CIO ,   _DII ,   _DIU ,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
         _GRA , KC_LOPT, KC_MINS, KC_DQUO, XXXXXXX,                        _TIN ,   _GRE ,   _ACE ,   _CII ,   _GRU ,
   //|--------+--------+--------+--------+--------|                    |--------+--------+--------+--------+--------|
-        _DIA , XXXXXXX,   _CEC , KC_GRV , XXXXXXX,                        _EUR ,   KC_M ,   _CIE ,   _DIE ,   _DIU ,
+        _DIA , XXXXXXX,   _CEC , KC_GRV , XXXXXXX,                        _EUR ,   KC_M ,   _CIE ,   _DIE ,   _CIU ,
   //|--------+--------+--------+--------+--------+--------|  |--------+--------+--------+--------+--------+--------|
                                  KC_LCTL, KC_LSFT, KC_LCMD,    XXXXXXX, XXXXXXX, XXXXXXX
                              //`--------------------------'  `--------------------------'
