@@ -366,7 +366,7 @@ bool process_record_user(uint16_t keycode, keyrecord_t *record) {
 }
 
 uint16_t achordion_timeout(uint16_t tap_hold_keycode) {
-  return 300;
+  return 250;
 }
 
 void matrix_scan_user(void) {
